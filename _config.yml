@@ -1,22 +1,22 @@
-title: Your awesome title
-author: GitHub User
-email: your-email@domain.com
+title: 
+author: Bolan Xu
+email: microbolan8051@gmail.com
 description: > # this means to ignore newlines until "twitter_username:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 
 # social links
-twitter_username: jekyllrb
-github_username:  jekyll
-rss: rss
+# twitter_username: jekyllrb
+github_username:  bolanxu
+#rss: rss
 # dribbble_username: jekyll
 # facebook_username: jekyll
 # flickr_username: jekyll
 # instagram_username: jekyll
 # linkedin_username: jekyll
 # pinterest_username: jekyll
-# youtube_username: jekyll
+youtube_username: TheBitDude
 # googleplus_username: +jekyll
 
 # Mastodon instances
@@ -33,6 +33,7 @@ show_excerpts: false # set to true to show excerpts on the homepage
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 minima:
   date_format: "%b %-d, %Y"
+  skin: dark
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
