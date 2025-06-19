@@ -6,8 +6,6 @@ categories: ROS
 
 # How to Set Up Webots for ROS2 #
 
-*Bolan Xu - June 19, 2025*
-
 ## First the Installation ##
 
 Based from this link:
@@ -16,11 +14,11 @@ Based from this link:
 
 First make sure you have Webots installed.
 
->:memo: ** Note **
->I am using **ROS2 Foxy with Ubuntu 20.04** and the only Webots
->version that works with this setup is **2022b**.
+> **Note:**
+> I am using **ROS2 Foxy with Ubuntu 20.04** and the only Webots
+> version that works with this setup is **2022b**.
 >
->You have to check which version of Webots works with your installation.
+> You have to check which version of Webots works with your installation.
 
 [Link to 2022b version](https://github.com/cyberbotics/webots/releases/tag/R2022b)
 
@@ -54,7 +52,7 @@ Then [download this world file](https://docs.ros.org/en/foxy/_downloads/5ad123fc
 
 Next we to have to edit the `my_robot_driver.py` file:
 
-```
+```python
 import rclpy
 from geometry_msgs.msg import Twist
 
@@ -99,7 +97,7 @@ class MyRobotDriver:
 With the plugin finished, we need create the URDF file for the robot.
 In the `resource` folder create a file named `my_robot.urdf` with this:
 
-```
+```xml
 <?xml version="1.0" ?>
 <robot name="My robot">
     <webots>
@@ -110,7 +108,7 @@ In the `resource` folder create a file named `my_robot.urdf` with this:
 
 Then we need to create the launch file in the launch folder of the package named `robot_launch.py` with:
 
-```
+```python
 import os
 import pathlib
 import launch
@@ -154,7 +152,7 @@ def generate_launch_description():
 And finally we need to modify the `setup.py` file to add the extra files we added.
 Replace its contents with:
 
-```
+```python
 from setuptools import setup
 
 package_name = 'webot_test'
