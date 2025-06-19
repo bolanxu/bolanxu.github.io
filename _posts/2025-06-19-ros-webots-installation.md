@@ -4,8 +4,6 @@ title: "How to set up ROS2 Robot Simulation with Webots (Installation and Testin
 categories: ROS
 ---
 
-# How to Set Up Webots for ROS2 #
-
 ## First the Installation ##
 
 Based from this link:
