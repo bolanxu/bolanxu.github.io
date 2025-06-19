@@ -14,7 +14,7 @@ github_username:  bolanxu
 # instagram_username: jekyll
 # linkedin_username: jekyll
 # pinterest_username: jekyll
-youtube_username: TheBitDude
+youtube_username: @TheBitDude
 # googleplus_username: +jekyll
 
 # Mastodon instances
@@ -25,7 +25,7 @@ youtube_username: TheBitDude
 #   instance: example.com
 
 
-show_excerpts: false # set to true to show excerpts on the homepage
+show_excerpts: true # set to true to show excerpts on the homepage
 
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
@@ -35,8 +35,8 @@ minima:
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
-#header_pages:
-# - about.html
+header_pages:
+ - about.html
 
 # Build settings
 theme: minima
