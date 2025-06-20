@@ -34,6 +34,8 @@ Source the the ROS environment, and run try out an example:
 
 Thats it! Now you have a fully set up ROS2 with Webots!
 
+![](_posts/img/webots_install.png)
+
 ### References
 
 <https://docs.ros.org/en/foxy/Tutorials/Advanced/Simulators/Webots/Installation-Ubuntu.html>
