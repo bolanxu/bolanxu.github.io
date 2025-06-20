@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to set up ROS2 Robot Simulation with Webots (For Ubuntu/Linux)"
+title: "How to set up ROS2 with Webots (For Ubuntu/Linux)"
 categories: ROS
 ---
 
