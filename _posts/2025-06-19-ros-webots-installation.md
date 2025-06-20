@@ -4,13 +4,14 @@ title: "How to set up ROS2 Robot Simulation with Webots (For Ubuntu/Linux)"
 categories: ROS
 ---
 
-**1. Installation**
+**1. Install Webots**
 
 First make sure you have Webots installed.
 
 > **Note:**
 > I am using **ROS2 Foxy with Ubuntu 20.04** and the only Webots version that works with this setup is **2022b**.
 > Here is a table shows how the versions matched up:
+> 
 > | **Webots Version** | **ROS 2 Version(s) Supported**                    | **Notes**                                                                                              |
 > |--------------------|---------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 > | R2025a             | Jazzy Jalisco                                     | Support for Iron Irwini dropped. Also compatible with Ubuntu 24.04 and macOS 14.                       |
@@ -22,11 +23,15 @@ First make sure you have Webots installed.
 
 Download the [.deb file](https://github.com/cyberbotics/webots/releases) of the version you want and install it with `sudo apt install ./{name of deb file}`.
 
+**2. Install the webots_ros2 Package**
+
 Then install the [webots_ros2](https://github.com/cyberbotics/webots_ros2) package using the command:
 
 `sudo apt-get install ros-foxy-webots-ros2`
 
 Now the installation should be done!
+
+**3. Test the Installation**
 
 Source the the ROS environment, and run try out an example:
 
@@ -34,8 +39,10 @@ Source the the ROS environment, and run try out an example:
 
 Thats it! Now you have a fully set up ROS2 with Webots!
 
+
 ![](_posts/img/webots_install.png)
 
-### References
+
+## References
 
 <https://docs.ros.org/en/foxy/Tutorials/Advanced/Simulators/Webots/Installation-Ubuntu.html>
