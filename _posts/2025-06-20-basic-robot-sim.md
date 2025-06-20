@@ -1,3 +1,9 @@
+---
+layout: post
+title: "How to set up a Basic ROS2 Robot Simulation with Webots"
+categories: ROS
+---
+
 **Set up a Basic Robot Simulation**
 
 Read my previous post on setting up ROS2 with Webots first.
