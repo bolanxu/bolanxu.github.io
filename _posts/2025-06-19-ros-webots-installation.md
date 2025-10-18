@@ -4,7 +4,7 @@ author: "Bolan Xu"
 date: 2025-06-19
 categories: [ROS]
 tags: [Tutorials]
-render_with_liquid: true
+render_with_liquid: false
 ---
 
 ## Install Webots
