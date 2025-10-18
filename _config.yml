@@ -14,9 +14,9 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: "Bolan Xu's Blog" # the main title
+title: "Bolan Xu" # the main title
 
-tagline: "Bolan's Xu Blog Website" # it will display as the subtitle
+tagline: "My Website" # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   "My personal website, that showcases what I'm working on right now."
@@ -40,9 +40,11 @@ social:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/username # change to your Twitter homepage
     # - https://github.com/username # change to your GitHub homepage
+    - https://github.com/bolanxu
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
+    - https://www.youtube.com/@TheBitDude
 
 # Site Verification Settings
 webmaster_verifications:
@@ -98,7 +100,7 @@ theme_mode: dark
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://avatars.githubusercontent.com/u/192940673?s=400&u=2a54d45f8f65e084970c3a56beb4fc126826d942&v=4
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
