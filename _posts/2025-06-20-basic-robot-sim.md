@@ -1,10 +1,10 @@
 ---
 title: "How to Set Up a Basic ROS2 Robot Simulation with Webots"
-author: "Bolan Xu"
+author: Bolan Xu
 date: 2025-06-20
 categories: [ROS]
 tags: [Tutorials]
-render_with_liquid: false
+render_with_liquid: true
 ---
 
 ## Set up Environment
@@ -172,7 +172,7 @@ ros2 launch webot_test robot_launch.py
 
 It should look something like this:
 
-![](https://github.com/bolanxu/bolanxu.github.io/blob/88b2b8ba5c393c9a692982b10ca6b79b0f2d64b3/_posts/img/webots_test_screenshot.png)
+<!-- ![](https://github.com/bolanxu/bolanxu.github.io/blob/88b2b8ba5c393c9a692982b10ca6b79b0f2d64b3/_posts/img/webots_test_screenshot.png) -->
 
 In another terminal running this command should move the robot forward:
 
