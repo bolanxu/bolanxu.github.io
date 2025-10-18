@@ -4,7 +4,7 @@ author: Bolan Xu
 date: 2025-06-20
 categories: [Science Olympiad]
 tags: [Projects]
-render_with_liquid: false
+render_with_liquid: true
 ---
 
 ## Introduction to Project
