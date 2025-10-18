@@ -22,7 +22,7 @@ Before I buy any parts, I usually like to model out my entire robot in CAD softw
 
 https://cad.onshape.com/documents/29281ce2187f9254c6e2e702/w/352244fd2678fb6f479b07da/e/51d2caeb455e393a1e6f87ce?renderMode=0&uiState=68f4193717e7b419ade04806
 
-![](/assets/images/ev_onshape_10_18_2025.png)
+![](https://raw.githubusercontent.com/bolanxu/bolanxu.github.io/refs/heads/main/assets/images/ev_onshape_10_18_2025.png)
 
 ## Design Technical Parts
 
