@@ -1,11 +1,10 @@
 ---
-layout: post
-title: "How to set up ROS2 with Webots (For Ubuntu/Linux)"
-categories: [ROS]
-author: Bolan Xu
+title: "How to Set Up ROS2 with Webots (For Ubuntu/Linux)"
+author: "Bolan Xu"
 date: 2025-06-19
+categories: [ROS]
 tags: [Tutorials]
-render_with_liquid: false
+render_with_liquid: true
 ---
 
 ## Install Webots
