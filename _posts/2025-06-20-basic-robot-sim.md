@@ -7,7 +7,7 @@ tags: [Tutorials]
 render_with_liquid: true
 ---
 
-**Set up a Basic Robot Simulation**
+## Set up Environment
 
 Read my previous post on setting up ROS2 with Webots first.
 
@@ -22,6 +22,8 @@ cd webot_test
 mkdir launch
 mkdir worlds
 ```
+
+## Add the Files
 
 Then [download this world file](https://docs.ros.org/en/foxy/_downloads/5ad123fc6a8f1ea79553d5039728084a/my_world.wbt) and move it into the worlds folder of the package.
 
@@ -157,6 +159,7 @@ setup(
     },
 )
 ```
+## Test Time
 
 Ok now its time to test it:
 
@@ -177,6 +180,6 @@ In another terminal running this command should move the robot forward:
 
 Thats it! Now you have a fully set up robot simulation with ROS2 and Webots!
 
-**References**
+## References
 
 <https://docs.ros.org/en/rolling/Tutorials/Advanced/Simulators/Webots/Setting-Up-Simulation-Webots-Basic.html>
