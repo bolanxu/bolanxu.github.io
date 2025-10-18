@@ -42,7 +42,7 @@ Source the the ROS environment, and run try out an example:
 
 Thats it! Now you have a fully set up ROS2 with Webots!
 
-![](https://github.com/bolanxu/bolanxu.github.io/blob/4186d97046a943cfb8b25bc223173e2feab69436/_posts/img/webots_install.png)
+<!-- ![](https://github.com/bolanxu/bolanxu.github.io/blob/4186d97046a943cfb8b25bc223173e2feab69436/_posts/img/webots_install.png) -->
 
 ## References
 
