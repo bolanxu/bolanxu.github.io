@@ -1,7 +1,10 @@
 ---
-layout: post
 title: "How to set up a Basic ROS2 Robot Simulation with Webots"
-categories: ROS
+author: Bolan Xu
+date: 2025-06-20
+categories: [ROS, Tutorial]
+tags: [Blog]
+render_with_liquid: true
 ---
 
 **Set up a Basic Robot Simulation**
