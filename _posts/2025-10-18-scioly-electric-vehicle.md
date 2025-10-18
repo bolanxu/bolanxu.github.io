@@ -1,7 +1,7 @@
 ---
 title: "Starting My Science Olympiad Electric Vehicle"
 author: Bolan Xu
-date: 2025-06-20
+date: 2025-18-25
 categories: [Science Olympiad]
 tags: [Projects]
 render_with_liquid: true
