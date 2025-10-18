@@ -8,7 +8,7 @@ tags: [Tutorials]
 render_with_liquid: false
 ---
 
-## 1. Install Webots
+## Install Webots
 
 First make sure you have Webots installed.
 
@@ -27,7 +27,7 @@ First make sure you have Webots installed.
 
 Download the [.deb file](https://github.com/cyberbotics/webots/releases) of the version you want and install it with `sudo apt install ./{name of deb file}`.
 
-## 2. Install the webots_ros2 Package
+## Install the webots_ros2 Package
 
 Then install the [webots_ros2](https://github.com/cyberbotics/webots_ros2) package using the command:
 
@@ -35,7 +35,7 @@ Then install the [webots_ros2](https://github.com/cyberbotics/webots_ros2) packa
 
 Now the installation should be done!
 
-## 3. Test the Installation
+## Test the Installation
 
 Source the the ROS environment, and run try out an example:
 
