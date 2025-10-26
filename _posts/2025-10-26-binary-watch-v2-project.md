@@ -35,7 +35,7 @@ The code was written in C using the SDCC (Small Device C Compiler), and the main
 Most of the logic revolves around calculating the binary time representation and managing the interaction with the real-time clock (RTC) module.
 
 The most challenging part of writing the code was interfacing with the DS1302 RTC module. This module communicates over the SPI protocol, but since the STC15W204S doesn’t have hardware SPI support, I had to implement a software-based version of SPI. 
-This was tricky, but with some careful timing and bit-banging (and inline Assembly :grimacing:), I was able to get it working reliably.
+This was tricky, but with some careful timing and bit-banging (and inline Assembly 😬), I was able to get it working reliably.
 To keep the code compact and efficient, I broke it into small functions for reading the RTC, updating the LEDs, and handling button presses (for setting the time). 
 The LEDs are used to show the hours, minutes, and seconds in binary form, which is a pretty neat challenge in itself.
 
