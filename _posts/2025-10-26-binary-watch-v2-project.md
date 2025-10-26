@@ -41,7 +41,7 @@ The LEDs are used to show the hours, minutes, and seconds in binary form, which 
 
 ## Hardware Side
 
-![](https://github.com/bolanxu/binary_watch/blob/deef5991fe152f8641dbee8f135e3da30145ae9f/docs/binary-watch-pcb.png)
+![](https://raw.githubusercontent.com/bolanxu/binary_watch/deef5991fe152f8641dbee8f135e3da30145ae9f/docs/binary-watch-pcb.png)
 
 <img width="2000" height="1414" alt="image" src="https://github.com/user-attachments/assets/4ae82dd2-b8ff-4cab-89b1-e8b1bae8291a" />
 
