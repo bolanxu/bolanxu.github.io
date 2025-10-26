@@ -55,6 +55,7 @@ Components Used:
 * 6 LEDs: These display the time in binary format, with each LED representing a power of 2.
 * 2 Push Buttons: These allow the user to adjust the time settings and read the watch.
 * Some Resistors: Protect LEDs.
+* Crystal Oscillator: To keep the time with DS1302.
 
 The circuit itself is very simple, a minimal microcontroller circuit with just the necessary components: two buttons for user input and six LEDs for displaying the binary time. 
 I opted for a simple, compact design to keep the build small and efficient, and I think it turned out quite well.
