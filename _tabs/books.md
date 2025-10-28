@@ -6,7 +6,7 @@ order: 4
 
 # Current Reads
 
-Here are some books that I am currently reading. I like to read from a diverse range of topics and I try to read at least once everyday.
+My current reading list spans a range of non-fiction topics. I read daily to expand my understanding and stay engaged with new ideas.
 
 ***
 
