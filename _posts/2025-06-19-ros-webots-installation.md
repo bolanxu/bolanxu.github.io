@@ -23,6 +23,7 @@ First make sure you have Webots installed.
 > | R2021b             | Foxy Fitzroy, Galactic Geochelone, Rolling Ridley | Fully compatible with these versions and the rolling release.                                          |
 > | R2021a             | Foxy Fitzroy                                      | Fully compatible with Foxy Fitzroy.                                                                    |
 > | R2020b             | Eloquent Elusor, Foxy Fitzroy                     | Fully compatible with these two versions.                                                              |
+{: .prompt-info }
 
 Download the [.deb file](https://github.com/cyberbotics/webots/releases) of the version you want and install it with `sudo apt install ./{name of deb file}`.
 
