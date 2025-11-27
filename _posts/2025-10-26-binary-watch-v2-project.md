@@ -2,8 +2,8 @@
 title: "My Binary Watch Project (V2)"
 author: "Bolan Xu"
 date: 2025-10-26
-categories: [Embedded]
-tags: [Projects]
+categories: [Projects]
+tags: [Embedded]
 render_with_liquid: true
 ---
 
