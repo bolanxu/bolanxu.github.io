@@ -2,8 +2,8 @@
 title: "How to Set Up a Basic ROS2 Robot Simulation with Webots"
 author: Bolan Xu
 date: 2025-06-20
-categories: [ROS]
-tags: [Tutorials]
+categories: [Tutorials]
+tags: [ROS]
 render_with_liquid: true
 ---
 
