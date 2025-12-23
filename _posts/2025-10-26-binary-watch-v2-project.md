@@ -1,10 +1,9 @@
 ---
 title: "My Binary Watch Project (V2)"
-author: "Bolan Xu"
 date: 2025-10-26
 categories: [Projects]
-tags: [Embedded]
-render_with_liquid: true
+tags: [embedded, watch, 8051]
+render_with_liquid: false
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BXuusliDPBQ?si=oaJnJE6nZfpPP-23" 
