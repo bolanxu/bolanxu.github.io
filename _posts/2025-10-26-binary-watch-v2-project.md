@@ -3,7 +3,7 @@ title: "My Binary Watch Project (V2)"
 date: 2025-10-26
 categories: [Projects]
 tags: [embedded, watch, 8051]
-image: /assets/images/binary-watch-pcb.png
+image: "/assets/images/binary-watch-pcb.png"
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BXuusliDPBQ?si=oaJnJE6nZfpPP-23" 
