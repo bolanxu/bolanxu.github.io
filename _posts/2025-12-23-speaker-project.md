@@ -26,14 +26,12 @@ I used Onshape to create the enclosure and here's the link to the rep with the s
 
 And here's a screenshot of the onshape design:
 
-![](/assets/images/center_speaker_img.png)
+![Onshape image]](/assets/images/center_speaker_img.png)
 
 ## Results
 
 The finished speaker actually sounded quite good which suprised me. Here are some photos of the final build:
 
-![](/assets/images/IMG_0120.JPG)
+![Front view](/assets/images/IMG_0120.JPG)
 
-![](/assets/images/IMG_0121.JPG)
-
-
+![Speaker View](/assets/images/IMG_0121.JPG)
