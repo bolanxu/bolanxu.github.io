@@ -1,5 +1,5 @@
 ---
-layout: false
+layout: post
 title: "How to Set Up ROS2 with Webots (For Ubuntu/Linux)"
 date: 2025-06-19
 categories: [Tutorials]
