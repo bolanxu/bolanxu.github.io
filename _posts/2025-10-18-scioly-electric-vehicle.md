@@ -4,6 +4,7 @@ title: "Starting My Science Olympiad Electric Vehicle"
 date: 2025-10-18
 categories: [Projects]
 tags: [scioly, EV]
+image: /assets/images/ev_onshape_10_18_2025.png
 ---
 
 ## Introduction to Project
