@@ -1,9 +1,9 @@
 ---
+layout: false
 title: "How to Set Up ROS2 with Webots (For Ubuntu/Linux)"
 date: 2025-06-19
 categories: [Tutorials]
 tags: [ROS, webots]
-render_with_liquid: false
 ---
 
 ## Install Webots
