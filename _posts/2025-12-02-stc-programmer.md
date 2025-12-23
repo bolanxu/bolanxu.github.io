@@ -17,7 +17,7 @@ The circuit is simple. The `CH340N` has an `RTS`, and that single handshake line
 
 During development I simulated the behavior and verified that `RTS` transitions produced a crisp, short outage on VCC followed by a stable restore. That’s all the MCU needs to start listening for the downloader.
 
-Here's the link to the simulation of the transistor part of the circuit using ![Falstad Circuit Simulator](https://www.falstad.com/circuit/circuitjs.html):
+Here's the link to the simulation of the transistor part of the circuit using Falstad Circuit Simulator:
 
 <https://tinyurl.com/circuit-link>
 
