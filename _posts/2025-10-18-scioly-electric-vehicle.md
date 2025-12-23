@@ -1,10 +1,9 @@
 ---
+layout: post
 title: "Starting My Science Olympiad Electric Vehicle"
-author: Bolan Xu
 date: 2025-10-18
 categories: [Projects]
 tags: [scioly, EV]
-render_with_liquid: false
 ---
 
 ## Introduction to Project
