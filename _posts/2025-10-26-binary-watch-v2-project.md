@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "My Binary Watch Project (V2)"
 date: 2025-10-26
 categories: [Projects]
