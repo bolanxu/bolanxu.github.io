@@ -4,6 +4,7 @@ title: "My Binary Watch Project (V2)"
 date: 2025-10-26
 categories: [Projects]
 tags: [embedded, watch, 8051]
+render_with_liquid: true
 image:
   path: "/assets/images/binary-watch-pcb.png"
   alt: "Binary Watch Project V2 PCB"
