@@ -4,6 +4,7 @@ date: 2025-10-26
 categories: [Projects]
 tags: [embedded, watch, 8051]
 render_with_liquid: false
+image: https://raw.githubusercontent.com/bolanxu/binary_watch/deef5991fe152f8641dbee8f135e3da30145ae9f/docs/binary-watch-pcb.png
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BXuusliDPBQ?si=oaJnJE6nZfpPP-23" 
