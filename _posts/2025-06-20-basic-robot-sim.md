@@ -1,9 +1,9 @@
 ---
+layout: post
 title: "How to Set Up a Basic ROS2 Robot Simulation with Webots"
 date: 2025-06-20
 categories: [Tutorials]
 tags: [ROS, webots, robots]
-render_with_liquid: false
 ---
 
 ## Set up Environment
