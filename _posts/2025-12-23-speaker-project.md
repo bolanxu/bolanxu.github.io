@@ -1,5 +1,5 @@
 ---
-title: "Building a Custom 3D Printed Center Speaker for My Home Theater"
+title: "Building a Custom 3D Printed Speaker Enclosure"
 date: 2025-12-23
 categories: [Projects, Electronics]
 tags: [3d-printing, audio, speaker, cad]
