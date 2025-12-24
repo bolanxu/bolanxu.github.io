@@ -3,7 +3,7 @@ layout: post
 title: "Auto STC Programmer"
 date: 2025-12-23
 categories: [Projects]
-tags: [stc, stc89c52, programmer, ch340, uart, stcgal, tools]
+tags: [c51, programmer, ch340, uart, stcgal, tools]
 image: /assets/images/IMG_0110.JPG
 # pin: true
 # mermaid: true
