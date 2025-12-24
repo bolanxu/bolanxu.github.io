@@ -26,7 +26,7 @@ I used Onshape to create the enclosure and here's the link to the rep with the s
 
 And here's a screenshot of the onshape design:
 
-![](https://github.com/bolanxu/Custom-3D-Printed-Speaker/blob/2e54c9f23150e9760fd0464fe5e5c0ecd358a7ce/center_speaker_img.png)
+![](/assets/images/center_speaker_img.png)
 
 ## Results
 
