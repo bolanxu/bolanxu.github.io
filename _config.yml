@@ -16,12 +16,12 @@ timezone: America/New_York
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: "Bolan Xu" # the main title
+title: "Bolan Xu | Website Blog" # the main title
 
-tagline: "My Website" # it will display as the subtitle
+tagline: "My Website/Blog" # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  "My personal website, that showcases what I'm working on right now."
+  "I don’t just use technology—I build it."
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -82,7 +82,7 @@ analytics:
 
 # Page views settings
 pageviews:
-  provider: # now only supports 'goatcounter'
+  provider: goatcounter
 
 # Prefer color scheme setting.
 #
@@ -95,7 +95,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode:
+theme_mode: dark
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
