@@ -13,9 +13,9 @@ Electronics and Computer Geek
 A junior in high school with a passion for electronics, programming, and robotics.
 
 * 🌍  I'm based in Ohio, United States
-* 🖥️  See my portfolio at [My Blog](http://bolanxu.github.io)
+* 🖥️  See my portfolio at [My Blog](https://bolanxu.github.io)
 * ✉️  You can contact me at [bolanx@bgsu.edu](mailto:bolanx@bgsu.edu)
-* 🚀  I'm currently working on [A Terminal-Style-Cellular-Device](http://github.com/bolanxu/Terminal-Style-Cellular-Device)
+* 🚀  I'm currently working on [A Terminal-Style-Cellular-Device](https://github.com/bolanxu/Terminal-Style-Cellular-Device)
 * 🧠  I'm currently learning about SIM card modem AT commands
 * 👥  I'm looking to collaborate on any interesting electronics, software, and hardware projects
 
