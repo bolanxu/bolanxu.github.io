@@ -18,10 +18,10 @@ timezone: America/New_York
 
 title: "Bolan Xu | Website Blog" # the main title
 
-tagline: "My Website/Blog" # it will display as the subtitle
+tagline: "I don’t just use technology—I build it." # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  "I don’t just use technology—I build it."
+  "My Website/Blog"
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
