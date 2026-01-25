@@ -33,11 +33,14 @@ github:
 youtube:
   username: TheBitDude # change to your Twitter username
 
+linkedin:
+  username: bolan-xu-3166a4395 # change to your Twitter username
+
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Bolan Xu
-  email: microbolan8051@gmail.com # change to your email address
+  email: bolanx@bgsu.edu # change to your email address
   links:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/username # change to your Twitter homepage
@@ -45,7 +48,7 @@ social:
     - https://github.com/bolanxu
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/bolan-xu-3166a4395/
     - https://www.youtube.com/@TheBitDude
 
 # Site Verification Settings
