@@ -6,7 +6,7 @@ icon: fas fa-file-alt
 order: 6
 ---
 
-[:file-folder: Download Resume PDF](/assets/pdf/Bolan_Xu_Resume.pdf){: .btn .btn-outline-primary .btn-sm }
+[<i class="fas fa-file-pdf fa-fw"></i> Download Resume PDF](/assets/pdf/Bolan_Xu_Resume.pdf){: .btn .btn-outline-primary .btn-sm }
 
 ## Objective
 > Aspiring Electronics and Computer Engineering researcher seeking advanced academic training with the long-term goal of earning a Ph.D. in the field.
