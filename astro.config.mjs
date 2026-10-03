@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://bolanxu.github.io',
-  base: undefined,
   output: 'static',
   
   server: {
