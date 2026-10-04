@@ -1,5 +1,49 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import BlogList from '../../components/BlogList.astro'; import { getCollection } from 'astro:content';
-const posts=(await getCollection('blog')).filter(p=>!p.data.draft).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogList from '../../components/BlogList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort(
+    (a, b) =>
+      b.data.date.valueOf() -
+      a.data.date.valueOf()
+  );
 ---
-<BaseLayout title="Lab Log — Bolan Xu"><section class="page-head"><div class="container"><div class="eyebrow">FIELD NOTES / BUILD LOG / DEBUGGING</div><h1>LAB LOG.</h1><p class="hero-copy">The unfinished bits, weird bugs, design decisions, and things I learned while building.</p></div></section><section class="section container"><BlogList posts={posts}/></section></BaseLayout>
+
+<BaseLayout
+  title="Writing — Bolan Xu"
+  description="Things I'm thinking about, learning, building, and trying to understand."
+>
+
+  <section class="page-head">
+
+    <div class="container">
+
+      <div class="eyebrow">
+        WRITING / IDEAS / PROJECTS
+      </div>
+
+      <h1>
+        Writing.
+      </h1>
+
+      <p class="hero-copy">
+        Thoughts about technology, AI, building things,
+        learning, and whatever has been taking up space
+        in my head lately.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="section container">
+
+    <BlogList posts={posts} />
+
+  </section>
+
+</BaseLayout>

@@ -1,5 +1,53 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import ProjectCard from '../../components/ProjectCard.astro'; import { getCollection } from 'astro:content';
-const projects= (await getCollection('projects')).sort((a,b)=>a.data.number.localeCompare(b.data.number));
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) =>
+    a.data.number.localeCompare(b.data.number)
+  );
 ---
-<BaseLayout title="Projects — Bolan Xu"><section class="page-head"><div class="container"><div class="eyebrow">PROJECT ARCHIVE</div><h1>THINGS<br/>I BUILT.</h1><p class="hero-copy">Hardware, software, robots, experiments, and the occasional overly complicated solution.</p></div></section><section class="section container"><div class="project-grid">{projects.map(project=><ProjectCard project={project}/>)}</div></section></BaseLayout>
+
+<BaseLayout
+  title="Projects — Bolan Xu"
+  description="Things I've built, experimented with, and learned from."
+>
+
+  <section class="page-head">
+
+    <div class="container">
+
+      <div class="eyebrow">
+        PROJECTS / BUILDS / EXPERIMENTS
+      </div>
+
+      <h1>
+        Things<br />
+        I've built.
+      </h1>
+
+      <p class="hero-copy">
+        Electronics, software, robots, experiments,
+        and the occasional overly complicated solution
+        to a very simple problem.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="section container">
+
+    <div class="project-grid">
+
+      {projects.map(project => (
+        <ProjectCard project={project} />
+      ))}
+
+    </div>
+
+  </section>
+
+</BaseLayout>

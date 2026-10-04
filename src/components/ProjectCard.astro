@@ -1,4 +1,47 @@
 ---
 const { project } = Astro.props;
 ---
-<a class="card" href={`/projects/${project.id}/`}><div><div class="card-top"><span class="number">PROJECT {project.data.number}</span><span class="status">{project.data.status}</span></div><h3>{project.data.title}</h3><p class="muted">{project.data.description}</p></div><div class="tags">{project.data.technologies.slice(0,4).map((x) => <span class="tag">{x}</span>)}</div></a>
+
+<a
+  class="card"
+  href={`/projects/${project.id}/`}
+>
+
+  <div>
+
+    <div class="card-top">
+
+      <span class="number">
+        {project.data.category}
+      </span>
+
+      <span class="status">
+        {project.data.status}
+      </span>
+
+    </div>
+
+    <h3>
+      {project.data.title}
+    </h3>
+
+    <p class="muted">
+      {project.data.description}
+    </p>
+
+  </div>
+
+
+  <div class="tags">
+
+    {project.data.technologies
+      .slice(0, 4)
+      .map((x) => (
+        <span class="tag">
+          {x}
+        </span>
+      ))}
+
+  </div>
+
+</a>

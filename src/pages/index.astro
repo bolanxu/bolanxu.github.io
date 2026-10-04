@@ -6,23 +6,24 @@ import { getCollection } from 'astro:content';
 
 const projects = (await getCollection('projects'))
   .filter(p => p.data.featured)
-  .sort((a, b) => a.data.number.localeCompare(b.data.number));
+  .sort((a, b) =>
+    a.data.number.localeCompare(b.data.number)
+  );
 
 const posts = (await getCollection('blog'))
   .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort(
+    (a, b) =>
+      b.data.date.valueOf() -
+      a.data.date.valueOf()
+  )
   .slice(0, 4);
 
-/*
- * Automatically populate "ON THE BENCH"
- *
- * Active projects = things currently being built
- * Experiment projects = things currently being explored
- */
 const benchProjects = (await getCollection('projects'))
-  .filter(p =>
-    p.data.status === 'active' ||
-    p.data.status === 'experiment'
+  .filter(
+    p =>
+      p.data.status === 'active' ||
+      p.data.status === 'experiment'
   )
   .sort((a, b) => {
     const dateA = a.data.updated ?? a.data.date;
@@ -37,46 +38,48 @@ const benchProjects = (await getCollection('projects'))
 
   <main class="home">
 
-    <!-- =========================================
-         HERO
-         ========================================= -->
+    <!-- HERO -->
 
-    <section class="hero">
+    <section class="hero container">
 
       <div class="hero-content">
 
         <div class="eyebrow">
-          ELECTRONICS · ROBOTICS · SOFTWARE · MAKING
+          BUILDING · THINKING · LEARNING
         </div>
 
         <h1>
-          My Portfolio
+          Hi, I'm<br />
+          Bolan.
         </h1>
 
         <p class="hero-copy">
-          I'm Bolan. I like figuring out how things work, then building my own
-          version. This is my website documenting what I'm making, breaking,
-          and learning.
+          I like building things, taking them apart, and thinking
+          about how technology changes the way we work and live.
+          This is where I write about what I'm making, what I'm
+          learning, and whatever I'm currently thinking about.
         </p>
 
         <div class="actions">
 
-          <a class="button primary" href="/projects">
-            EXPLORE PROJECTS →
+          <a
+            class="button primary"
+            href="/blog"
+          >
+            Read my writing →
           </a>
 
-          <a class="button" href="/blog">
-            READ THE LAB LOG
+          <a
+            class="button"
+            href="/projects"
+          >
+            See my projects
           </a>
 
         </div>
 
       </div>
 
-
-      <!-- =========================================
-           PROFILE PHOTO
-           ========================================= -->
 
       <aside class="profile">
 
@@ -88,27 +91,22 @@ const benchProjects = (await getCollection('projects'))
             alt="Bolan Xu"
           />
 
-          <div class="profile-corner top-left"></div>
-          <div class="profile-corner top-right"></div>
-          <div class="profile-corner bottom-left"></div>
-          <div class="profile-corner bottom-right"></div>
-
         </div>
 
         <div class="profile-info">
 
           <div>
             <span class="eyebrow">
-              HIGH SCHOOL SENIOR
+              High school senior
             </span>
 
             <h3>
-              BOLAN XU
+              Bolan Xu
             </h3>
           </div>
 
           <span class="profile-mark mono">
-            BOWLING GREEN · OH
+            Bowling Green, OH
           </span>
 
         </div>
@@ -118,18 +116,16 @@ const benchProjects = (await getCollection('projects'))
     </section>
 
 
-    <!-- =========================================
-         ON THE BENCH
-         ========================================= -->
+    <!-- CURRENTLY -->
 
-    <section class="bench-section">
+    <section class="bench-section container">
 
       <div class="bench">
 
         <div class="bench-title">
 
           <span class="eyebrow">
-            ON THE BENCH
+            Currently
           </span>
 
           <span class="mono muted">
@@ -137,7 +133,6 @@ const benchProjects = (await getCollection('projects'))
           </span>
 
         </div>
-
 
         <div class="bench-projects">
 
@@ -171,232 +166,77 @@ const benchProjects = (await getCollection('projects'))
     </section>
 
 
-    <!-- =========================================
-         SELECTED PROJECTS
-         ========================================= -->
+    <!-- WRITING -->
 
     <section class="section">
 
-      <div class="section-head">
+      <div class="container">
 
-        <div>
+        <div class="section-head">
 
-          <div class="eyebrow">
-            01 / WORK
+          <div>
+
+            <div class="eyebrow">
+              01 / WRITING
+            </div>
+
+            <h2>
+              Things I'm thinking about.
+            </h2>
+
           </div>
 
-          <h2>
-            Selected builds.
-          </h2>
+          <a href="/blog">
+            ALL WRITING →
+          </a>
 
         </div>
 
-        <a href="/projects">
-          VIEW ARCHIVE →
-        </a>
-
-      </div>
-
-
-      <div class="project-grid">
-
-        {projects.map(project => (
-          <ProjectCard project={project} />
-        ))}
+        <BlogList posts={posts} />
 
       </div>
 
     </section>
 
 
-    <!-- =========================================
-         LAB LOG
-         ========================================= -->
+    <!-- PROJECTS -->
 
     <section class="section">
 
-      <div class="section-head">
+      <div class="container">
 
-        <div>
+        <div class="section-head">
 
-          <div class="eyebrow">
-            02 / NOTES
+          <div>
+
+            <div class="eyebrow">
+              02 / PROJECTS
+            </div>
+
+            <h2>
+              Things I've built.
+            </h2>
+
           </div>
 
-          <h2>
-            Lab log.
-          </h2>
+          <a href="/projects">
+            VIEW PROJECTS →
+          </a>
 
         </div>
 
-        <a href="/blog">
-          ALL ENTRIES →
-        </a>
+        <div class="project-grid">
+
+          {projects.map(project => (
+            <ProjectCard project={project} />
+          ))}
+
+        </div>
 
       </div>
-
-
-      <BlogList posts={posts} />
 
     </section>
 
   </main>
-
-
-  <style>
-
-    /* =========================================
-       HOME
-       ========================================= */
-
-    .home {
-      padding-inline: 32px;
-    }
-
-
-    /* =========================================
-       HERO
-       ========================================= */
-
-    .hero {
-      grid-template-columns: 1.25fr 0.75fr;
-
-      align-items: center;
-
-      gap: 60px;
-    }
-
-    .hero-content {
-      min-width: 0;
-    }
-
-
-    /* =========================================
-       PROFILE
-       ========================================= */
-
-    .profile {
-      width: min(100%, 300px);
-
-      justify-self: end;
-    }
-
-    .profile-image-wrap {
-      position: relative;
-
-      border: 1px solid var(--line);
-
-      background: var(--panel);
-
-      padding: 10px;
-
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.25);
-    }
-
-    .profile-image {
-      width: 100%;
-
-      aspect-ratio: 4 / 5;
-
-      display: block;
-
-      object-fit: cover;
-
-      filter:
-        saturate(0.82)
-        contrast(1.03);
-
-      border: 1px solid var(--line);
-    }
-
-
-    /* Technical corner marks */
-
-    .profile-corner {
-      position: absolute;
-
-      width: 18px;
-      height: 18px;
-
-      pointer-events: none;
-    }
-
-    .profile-corner::before,
-    .profile-corner::after {
-      content: "";
-
-      position: absolute;
-
-      background: var(--accent);
-    }
-
-    .profile-corner::before {
-      width: 18px;
-      height: 1px;
-    }
-
-    .profile-corner::after {
-      width: 1px;
-      height: 18px;
-    }
-
-    .top-left {
-      top: 4px;
-      left: 4px;
-    }
-
-    .top-right {
-      top: 4px;
-      right: 4px;
-
-      transform: rotate(90deg);
-    }
-
-    .bottom-left {
-      bottom: 4px;
-      left: 4px;
-
-      transform: rotate(-90deg);
-    }
-
-    .bottom-right {
-      bottom: 4px;
-      right: 4px;
-
-      transform: rotate(180deg);
-    }
-
-
-    /* Photo information */
-
-    .profile-info {
-      display: flex;
-
-      justify-content: space-between;
-      align-items: flex-end;
-
-      padding-top: 14px;
-    }
-
-    .profile-info h3 {
-      margin-top: 5px;
-      margin-bottom: 0;
-
-      font-size: 1.15rem;
-
-      letter-spacing: -0.02em;
-    }
-
-    .profile-mark {
-      font-size: 0.68rem;
-
-      color: var(--muted);
-    }
-
-
-    
-
-  </style>
 
 </BaseLayout>
