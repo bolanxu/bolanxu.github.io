@@ -1,6 +1,100 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import { getCollection, render } from 'astro:content';
-export async function getStaticPaths(){const projects=await getCollection('projects'); return projects.map(project=>({params:{slug:project.id},props:{project}}));}
-const {project}=Astro.props; const {Content}=await render(project);
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+// Find all blog posts associated with this project
+const relatedPosts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft && post.data.project === project.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title={`${project.data.title} — Bolan Xu`} description={project.data.description}><section class="page-head"><div class="container"><div class="eyebrow">PROJECT {project.data.number} / {project.data.category}</div><h1>{project.data.title}</h1><p class="hero-copy">{project.data.description}</p><div class="project-meta"><div class="spec"><span class="spec-label">Status</span><span class="spec-value">{project.data.status}</span></div><div class="spec"><span class="spec-label">Started</span><span class="spec-value">{project.data.date.toLocaleDateString('en-US',{month:'short',year:'numeric'})}</span></div>{Object.entries(project.data.specs).map(([key,value])=><div class="spec"><span class="spec-label">{key}</span><span class="spec-value">{value}</span></div>)}</div><div class="tags">{project.data.technologies.map(x=><span class="tag">{x}</span>)}</div></div></section><article class="container content prose"><Content /></article></BaseLayout>
+
+<BaseLayout
+  title={`${project.data.title} — Projects`}
+  description={project.data.description}
+>
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">
+        PROJECT / {project.data.number}
+      </div>
+
+      <h1>{project.data.title}</h1>
+
+      <p class="hero-copy">{project.data.description}</p>
+
+      <div class="tags">
+        <span class="tag">{project.data.category}</span>
+        <span class="tag">{project.data.status}</span>
+
+        {project.data.technologies.map((technology) => (
+          <span class="tag">{technology}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <article class="container content prose">
+    <Content />
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">PROJECT LOG</div>
+            <h2>Build notes.</h2>
+          </div>
+        </div>
+
+        <div class="log-list">
+          {relatedPosts.map((post) => (
+            <a class="log-item" href={`/blog/${post.id}`}>
+              <span class="log-date">
+                {post.data.date.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </span>
+
+              <span>
+                <span class="log-title">{post.data.title}</span>
+                <span class="log-description">
+                  {post.data.description}
+                </span>
+              </span>
+
+              <span class="log-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <style>
+    .log-description {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+
+    .log-item {
+      text-decoration: none;
+    }
+  </style>
+</BaseLayout>

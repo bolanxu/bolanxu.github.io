@@ -1,6 +1,174 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import { getCollection, render } from 'astro:content';
-export async function getStaticPaths(){const posts=await getCollection('blog'); return posts.filter(p=>!p.data.draft).map(post=>({params:{slug:post.id},props:{post}}));}
-const {post}=Astro.props; const {Content}=await render(post);
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  return posts
+    .filter((p) => !p.data.draft)
+    .map((post) => ({
+      params: { slug: post.id },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
 ---
-<BaseLayout title={`${post.data.title} — Lab Log`} description={post.data.description}><section class="page-head"><div class="container"><div class="eyebrow">LAB LOG / {post.data.date.toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'numeric'})}</div><h1>{post.data.title}</h1><p class="hero-copy">{post.data.description}</p><div class="tags">{post.data.tags.map(x=><span class="tag">{x}</span>)}</div></div></section><article class="container content prose"><Content /></article></BaseLayout>
+
+<BaseLayout
+  title={`${post.data.title} — Lab Log`}
+  description={post.data.description}
+>
+  <section class="page-head">
+    <div class="container">
+      <div class="eyebrow">
+        LAB LOG /
+        {post.data.date.toLocaleDateString('en-US', {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric',
+        })}
+      </div>
+
+      <h1>{post.data.title}</h1>
+
+      <p class="hero-copy">{post.data.description}</p>
+
+      <div class="tags">
+        {post.data.tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <article class="container content prose">
+    {post.data.image && (
+      <img
+        class="post-hero-image"
+        src={post.data.image}
+        alt={post.data.title}
+      />
+    )}
+
+    <Content />
+  </article>
+</BaseLayout>
+
+<script>
+  import mermaid from 'mermaid';
+
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    securityLevel: 'loose',
+
+    themeVariables: {
+      background: '#141716',
+      primaryColor: '#191c1b',
+      primaryTextColor: '#e9e7df',
+      primaryBorderColor: '#4b514d',
+      lineColor: '#e69a3a',
+      secondaryColor: '#141716',
+      secondaryTextColor: '#e9e7df',
+      secondaryBorderColor: '#4b514d',
+      tertiaryColor: '#191c1b',
+      tertiaryTextColor: '#e9e7df',
+      tertiaryBorderColor: '#4b514d',
+      fontFamily: 'Space Grotesk, sans-serif',
+      fontSize: '14px',
+    },
+
+    flowchart: {
+      curve: 'basis',
+      padding: 20,
+    },
+  });
+
+  async function renderMermaid() {
+    // Astro renders ```mermaid blocks as:
+    // <pre><code class="language-mermaid">...</code></pre>
+    const blocks = document.querySelectorAll(
+      'code.language-mermaid'
+    );
+
+    if (!blocks.length) {
+      return;
+    }
+
+    for (const code of blocks) {
+      const pre = code.parentElement;
+
+      if (!pre || pre.tagName !== 'PRE') {
+        continue;
+      }
+
+      const source = code.textContent?.trim();
+
+      if (!source) {
+        continue;
+      }
+
+      const container = document.createElement('div');
+      container.className = 'mermaid-container';
+
+      const diagram = document.createElement('div');
+      diagram.className = 'mermaid';
+      diagram.textContent = source;
+
+      container.appendChild(diagram);
+      pre.replaceWith(container);
+    }
+
+    try {
+      await mermaid.run({
+        querySelector: '.mermaid',
+      });
+    } catch (error) {
+      console.error('Mermaid rendering failed:', error);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      renderMermaid,
+      { once: true }
+    );
+  } else {
+    renderMermaid();
+  }
+</script>
+
+<style>
+  .post-hero-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 45px;
+    border: 1px solid var(--line);
+  }
+
+  .mermaid-container {
+    width: 100%;
+    margin: 35px 0;
+    padding: 28px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    min-width: max-content;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
