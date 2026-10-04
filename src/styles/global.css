@@ -470,18 +470,12 @@ h3 {
 -------------------------------------------------- */
 
 .bench-section {
-  display: flex;
-
-  justify-content: flex-end;
-
-  padding-bottom: 10px;
-}
-
-.bench-section .bench {
-  width: min(100%, 430px);
+  padding: 45px 0 10px;
 }
 
 .bench {
+  width: 100%;
+
   border: 1px solid var(--line);
 
   background:
@@ -491,9 +485,7 @@ h3 {
       rgba(20, 23, 22, 0.75)
     );
 
-  padding: 20px;
-
-  align-self: end;
+  padding: 24px;
 
   position: relative;
 
@@ -518,20 +510,60 @@ h3 {
   display: flex;
 
   justify-content: space-between;
+  align-items: center;
 
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.bench-projects {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 0;
 }
 
 .bench-project {
+  display: block;
+
+  padding: 18px 22px;
+
   border-top: 1px solid var(--line);
 
-  padding: 18px 0;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.bench-project + .bench-project {
+  border-left: 1px solid var(--line);
+}
+
+.bench-project:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.bench-project h3 {
+  margin: 7px 0 6px;
+
+  font-size: 1.35rem;
+
+  letter-spacing: -0.025em;
+}
+
+.bench-project p {
+  margin: 0;
+
+  font-size: 0.92rem;
+
+  line-height: 1.5;
 }
 
 .status {
   font-family: 'DM Mono', monospace;
 
-  font-size: 0.7rem;
+  font-size: 0.68rem;
 
   text-transform: uppercase;
 
@@ -1194,6 +1226,100 @@ h3 {
 }
 
 /* --------------------------------------------------
+   CONTACT
+-------------------------------------------------- */
+
+.contact-section {
+  margin: 80px 40px 0;
+  padding: 50px 40px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.contact-section h2 {
+  margin-top: 14px;
+  margin-bottom: 12px;
+}
+
+.contact-section > p {
+  max-width: 620px;
+  margin-bottom: 32px;
+}
+
+.contact-links {
+  border-top: 1px solid var(--line);
+}
+
+.contact-link {
+  display: grid;
+  grid-template-columns: 120px 1fr 30px;
+  align-items: center;
+  gap: 20px;
+
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+
+  transition:
+    color 0.15s ease,
+    padding-left 0.15s ease;
+}
+
+.contact-link:hover {
+  color: var(--accent);
+  padding-left: 8px;
+}
+
+.contact-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.contact-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+}
+
+.contact-arrow {
+  font-family: 'DM Mono', monospace;
+  color: var(--muted);
+  text-align: right;
+}
+
+.contact-link:hover .contact-arrow {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    margin: 60px 10px 0;
+    padding: 40px 20px 15px;
+  }
+
+  .contact-link {
+    grid-template-columns: 90px 1fr 20px;
+    gap: 12px;
+  }
+
+  .contact-value {
+    font-size: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-link {
+    grid-template-columns: 90px 1fr 20px;
+    gap: 12px;
+  }
+
+  .contact-value {
+    font-size: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* --------------------------------------------------
    RESPONSIVE
 -------------------------------------------------- */
 
@@ -1261,6 +1387,14 @@ h3 {
 
   .bench-section .bench {
     width: 100%;
+  }
+
+  .bench-projects {
+    grid-template-columns: 1fr;
+  }
+
+  .bench-project + .bench-project {
+    border-left: none;
   }
 }
 

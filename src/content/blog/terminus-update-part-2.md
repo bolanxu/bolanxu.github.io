@@ -3,6 +3,7 @@ title: "Terminus Update - Physical Keyboard, SMS, and a Real PCB (Part 2)"
 description: ""
 date: 2026-05-12
 tags: ["phone", "sms", "esp8266", "keyboard", "embedded", "c51", "flask"]
+project: "terminus"
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9kbe5FLuUFI" 

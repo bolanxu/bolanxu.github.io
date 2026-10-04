@@ -14,14 +14,4 @@ specs:
   Steering: "Ackermann"
 ---
 
-## The problem
-
-Build a small vehicle that can repeatedly hit distance and time targets while dealing with real mechanical imperfections.
-
-## The interesting part
-
-The hard part was not making the wheels spin. It was making the vehicle behave consistently when the servo had slack, the battery voltage changed, and the two sides of the vehicle did not behave exactly the same.
-
-## Control system
-
-Encoder feedback was used for differential straight-line correction, while the steering system handled waypoint turns and a final tape-stop sequence.
+A small vehicle that can repeatedly hit distance and time targets for the Science Olympiad 2026 competition.

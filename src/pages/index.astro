@@ -12,31 +12,55 @@ const posts = (await getCollection('blog'))
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 4);
+
+/*
+ * Automatically populate "ON THE BENCH"
+ *
+ * Active projects = things currently being built
+ * Experiment projects = things currently being explored
+ */
+const benchProjects = (await getCollection('projects'))
+  .filter(p =>
+    p.data.status === 'active' ||
+    p.data.status === 'experiment'
+  )
+  .sort((a, b) => {
+    const dateA = a.data.updated ?? a.data.date;
+    const dateB = b.data.updated ?? b.data.date;
+
+    return dateB.valueOf() - dateA.valueOf();
+  })
+  .slice(0, 3);
 ---
 
 <BaseLayout>
+
   <main class="home">
 
-    <!-- HERO -->
+    <!-- =========================================
+         HERO
+         ========================================= -->
+
     <section class="hero">
 
       <div class="hero-content">
+
         <div class="eyebrow">
           ELECTRONICS · ROBOTICS · SOFTWARE · MAKING
         </div>
 
         <h1>
-          I BUILD<br />
-          THINGS.
+          My Portfolio
         </h1>
 
         <p class="hero-copy">
           I'm Bolan. I like figuring out how things work, then building my own
-          version. This is the running record of what I'm making, breaking,
+          version. This is my website documenting what I'm making, breaking,
           and learning.
         </p>
 
         <div class="actions">
+
           <a class="button primary" href="/projects">
             EXPLORE PROJECTS →
           </a>
@@ -44,11 +68,16 @@ const posts = (await getCollection('blog'))
           <a class="button" href="/blog">
             READ THE LAB LOG
           </a>
+
         </div>
+
       </div>
 
 
-      <!-- PROFILE PHOTO -->
+      <!-- =========================================
+           PROFILE PHOTO
+           ========================================= -->
+
       <aside class="profile">
 
         <div class="profile-image-wrap">
@@ -69,12 +98,17 @@ const posts = (await getCollection('blog'))
         <div class="profile-info">
 
           <div>
-            <span class="eyebrow">01 / OPERATOR</span>
-            <h3>BOLAN XU</h3>
+            <span class="eyebrow">
+              HIGH SCHOOL SENIOR
+            </span>
+
+            <h3>
+              BOLAN XU
+            </h3>
           </div>
 
           <span class="profile-mark mono">
-            BG · OH
+            BOWLING GREEN · OH
           </span>
 
         </div>
@@ -84,29 +118,52 @@ const posts = (await getCollection('blog'))
     </section>
 
 
+    <!-- =========================================
+         ON THE BENCH
+         ========================================= -->
+
     <section class="bench-section">
 
       <div class="bench">
 
         <div class="bench-title">
-          <span class="eyebrow">ON THE BENCH</span>
-          <span class="mono muted">NOW</span>
+
+          <span class="eyebrow">
+            ON THE BENCH
+          </span>
+
+          <span class="mono muted">
+            NOW
+          </span>
+
         </div>
 
-        <div class="bench-project">
-          <span class="status">ACTIVE</span>
-          <h3>Terminus</h3>
-          <p class="muted">
-            A terminal-style cellular phone built from scratch.
-          </p>
-        </div>
 
-        <div class="bench-project">
-          <span class="status">EXPERIMENT</span>
-          <h3>ROS Graph</h3>
-          <p class="muted">
-            A visual node environment for ROS 2 developers.
-          </p>
+        <div class="bench-projects">
+
+          {benchProjects.map((project) => (
+
+            <a
+              class="bench-project"
+              href={`/projects/${project.id}`}
+            >
+
+              <span class="status">
+                {project.data.status}
+              </span>
+
+              <h3>
+                {project.data.title}
+              </h3>
+
+              <p class="muted">
+                {project.data.description}
+              </p>
+
+            </a>
+
+          ))}
+
         </div>
 
       </div>
@@ -114,14 +171,24 @@ const posts = (await getCollection('blog'))
     </section>
 
 
-    <!-- PROJECTS -->
+    <!-- =========================================
+         SELECTED PROJECTS
+         ========================================= -->
+
     <section class="section">
 
       <div class="section-head">
 
         <div>
-          <div class="eyebrow">01 / WORK</div>
-          <h2>Selected builds.</h2>
+
+          <div class="eyebrow">
+            01 / WORK
+          </div>
+
+          <h2>
+            Selected builds.
+          </h2>
+
         </div>
 
         <a href="/projects">
@@ -130,23 +197,36 @@ const posts = (await getCollection('blog'))
 
       </div>
 
+
       <div class="project-grid">
+
         {projects.map(project => (
           <ProjectCard project={project} />
         ))}
+
       </div>
 
     </section>
 
 
-    <!-- LAB LOG -->
+    <!-- =========================================
+         LAB LOG
+         ========================================= -->
+
     <section class="section">
 
       <div class="section-head">
 
         <div>
-          <div class="eyebrow">02 / NOTES</div>
-          <h2>Lab log.</h2>
+
+          <div class="eyebrow">
+            02 / NOTES
+          </div>
+
+          <h2>
+            Lab log.
+          </h2>
+
         </div>
 
         <a href="/blog">
@@ -154,6 +234,7 @@ const posts = (await getCollection('blog'))
         </a>
 
       </div>
+
 
       <BlogList posts={posts} />
 
@@ -163,6 +244,10 @@ const posts = (await getCollection('blog'))
 
 
   <style>
+
+    /* =========================================
+       HOME
+       ========================================= */
 
     .home {
       padding-inline: 32px;
@@ -174,9 +259,11 @@ const posts = (await getCollection('blog'))
        ========================================= */
 
     .hero {
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.25fr 0.75fr;
+
       align-items: center;
-      gap: 80px;
+
+      gap: 60px;
     }
 
     .hero-content {
@@ -189,7 +276,8 @@ const posts = (await getCollection('blog'))
        ========================================= */
 
     .profile {
-      width: min(100%, 390px);
+      width: min(100%, 300px);
+
       justify-self: end;
     }
 
@@ -208,6 +296,7 @@ const posts = (await getCollection('blog'))
 
     .profile-image {
       width: 100%;
+
       aspect-ratio: 4 / 5;
 
       display: block;
@@ -260,18 +349,21 @@ const posts = (await getCollection('blog'))
     .top-right {
       top: 4px;
       right: 4px;
+
       transform: rotate(90deg);
     }
 
     .bottom-left {
       bottom: 4px;
       left: 4px;
+
       transform: rotate(-90deg);
     }
 
     .bottom-right {
       bottom: 4px;
       right: 4px;
+
       transform: rotate(180deg);
     }
 
@@ -298,61 +390,13 @@ const posts = (await getCollection('blog'))
 
     .profile-mark {
       font-size: 0.68rem;
+
       color: var(--muted);
     }
 
 
-    /* =========================================
-       BENCH
-       ========================================= */
-
-    .bench-section {
-      display: flex;
-      justify-content: flex-end;
-
-      padding-bottom: 10px;
-    }
-
-    .bench-section .bench {
-      width: min(100%, 430px);
-    }
-
-
-    /* =========================================
-       MOBILE
-       ========================================= */
-
-    @media (max-width: 800px) {
-
-      .home {
-        padding-inline: 20px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-
-        gap: 50px;
-      }
-
-      .profile {
-        width: min(100%, 360px);
-
-        justify-self: start;
-      }
-
-      .profile-image {
-        aspect-ratio: 4 / 5;
-      }
-
-      .bench-section {
-        justify-content: stretch;
-      }
-
-      .bench-section .bench {
-        width: 100%;
-      }
-
-    }
+    
 
   </style>
+
 </BaseLayout>
