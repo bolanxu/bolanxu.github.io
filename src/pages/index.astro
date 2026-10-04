@@ -16,23 +16,79 @@ const posts = (await getCollection('blog'))
 
 <BaseLayout>
   <main class="home">
+
+    <!-- HERO -->
     <section class="hero">
-      <div>
-        <div class="eyebrow">ELECTRONICS · ROBOTICS · SOFTWARE · MAKING</div>
-        <h1>I BUILD<br />THINGS.</h1>
+
+      <div class="hero-content">
+        <div class="eyebrow">
+          ELECTRONICS · ROBOTICS · SOFTWARE · MAKING
+        </div>
+
+        <h1>
+          I BUILD<br />
+          THINGS.
+        </h1>
+
         <p class="hero-copy">
           I'm Bolan. I like figuring out how things work, then building my own
-          version. This is a collection of what I'm making, breaking,
+          version. This is the running record of what I'm making, breaking,
           and learning.
         </p>
 
         <div class="actions">
-          <a class="button primary" href="/projects">EXPLORE PROJECTS →</a>
-          <a class="button" href="/blog">READ THE LAB LOG</a>
+          <a class="button primary" href="/projects">
+            EXPLORE PROJECTS →
+          </a>
+
+          <a class="button" href="/blog">
+            READ THE LAB LOG
+          </a>
         </div>
       </div>
 
-      <aside class="bench">
+
+      <!-- PROFILE PHOTO -->
+      <aside class="profile">
+
+        <div class="profile-image-wrap">
+
+          <img
+            class="profile-image"
+            src="/assets/images/bolan.jpg"
+            alt="Bolan Xu"
+          />
+
+          <div class="profile-corner top-left"></div>
+          <div class="profile-corner top-right"></div>
+          <div class="profile-corner bottom-left"></div>
+          <div class="profile-corner bottom-right"></div>
+
+        </div>
+
+        <div class="profile-info">
+
+          <div>
+            <span class="eyebrow">01 / OPERATOR</span>
+            <h3>BOLAN XU</h3>
+          </div>
+
+          <span class="profile-mark mono">
+            BG · OH
+          </span>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- ON THE BENCH -->
+    <section class="bench-section">
+
+      <div class="bench">
+
         <div class="bench-title">
           <span class="eyebrow">ON THE BENCH</span>
           <span class="mono muted">NOW</span>
@@ -41,53 +97,263 @@ const posts = (await getCollection('blog'))
         <div class="bench-project">
           <span class="status">ACTIVE</span>
           <h3>Terminus</h3>
-          <p class="muted">A terminal-style cellular phone built from scratch.</p>
+          <p class="muted">
+            A terminal-style cellular phone built from scratch.
+          </p>
         </div>
 
         <div class="bench-project">
           <span class="status">EXPERIMENT</span>
           <h3>ROS Graph</h3>
-          <p class="muted">A visual node environment for ROS 2 developers.</p>
+          <p class="muted">
+            A visual node environment for ROS 2 developers.
+          </p>
         </div>
-      </aside>
+
+      </div>
+
     </section>
 
+
+    <!-- PROJECTS -->
     <section class="section">
+
       <div class="section-head">
+
         <div>
           <div class="eyebrow">01 / WORK</div>
           <h2>Selected builds.</h2>
         </div>
-        <a href="/projects">VIEW ARCHIVE →</a>
+
+        <a href="/projects">
+          VIEW ARCHIVE →
+        </a>
+
       </div>
 
       <div class="project-grid">
-        {projects.map(project => <ProjectCard project={project} />)}
+        {projects.map(project => (
+          <ProjectCard project={project} />
+        ))}
       </div>
+
     </section>
 
+
+    <!-- LAB LOG -->
     <section class="section">
+
       <div class="section-head">
+
         <div>
           <div class="eyebrow">02 / NOTES</div>
           <h2>Lab log.</h2>
         </div>
-        <a href="/blog">ALL ENTRIES →</a>
+
+        <a href="/blog">
+          ALL ENTRIES →
+        </a>
+
       </div>
 
       <BlogList posts={posts} />
+
     </section>
+
   </main>
 
+
   <style>
+
     .home {
       padding-inline: 32px;
     }
 
-    @media (max-width: 700px) {
+
+    /* =========================================
+       HERO
+       ========================================= */
+
+    .hero {
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .hero-content {
+      min-width: 0;
+    }
+
+
+    /* =========================================
+       PROFILE
+       ========================================= */
+
+    .profile {
+      width: min(100%, 390px);
+      justify-self: end;
+    }
+
+    .profile-image-wrap {
+      position: relative;
+
+      border: 1px solid var(--line);
+
+      background: var(--panel);
+
+      padding: 10px;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .profile-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+
+      display: block;
+
+      object-fit: cover;
+
+      filter:
+        saturate(0.82)
+        contrast(1.03);
+
+      border: 1px solid var(--line);
+    }
+
+
+    /* Technical corner marks */
+
+    .profile-corner {
+      position: absolute;
+
+      width: 18px;
+      height: 18px;
+
+      pointer-events: none;
+    }
+
+    .profile-corner::before,
+    .profile-corner::after {
+      content: "";
+
+      position: absolute;
+
+      background: var(--accent);
+    }
+
+    .profile-corner::before {
+      width: 18px;
+      height: 1px;
+    }
+
+    .profile-corner::after {
+      width: 1px;
+      height: 18px;
+    }
+
+    .top-left {
+      top: 4px;
+      left: 4px;
+    }
+
+    .top-right {
+      top: 4px;
+      right: 4px;
+      transform: rotate(90deg);
+    }
+
+    .bottom-left {
+      bottom: 4px;
+      left: 4px;
+      transform: rotate(-90deg);
+    }
+
+    .bottom-right {
+      bottom: 4px;
+      right: 4px;
+      transform: rotate(180deg);
+    }
+
+
+    /* Photo information */
+
+    .profile-info {
+      display: flex;
+
+      justify-content: space-between;
+      align-items: flex-end;
+
+      padding-top: 14px;
+    }
+
+    .profile-info h3 {
+      margin-top: 5px;
+      margin-bottom: 0;
+
+      font-size: 1.15rem;
+
+      letter-spacing: -0.02em;
+    }
+
+    .profile-mark {
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+
+    /* =========================================
+       BENCH
+       ========================================= */
+
+    .bench-section {
+      display: flex;
+      justify-content: flex-end;
+
+      padding-bottom: 10px;
+    }
+
+    .bench-section .bench {
+      width: min(100%, 430px);
+    }
+
+
+    /* =========================================
+       MOBILE
+       ========================================= */
+
+    @media (max-width: 800px) {
+
       .home {
         padding-inline: 20px;
       }
+
+      .hero {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+      }
+
+      .profile {
+        width: min(100%, 360px);
+
+        justify-self: start;
+      }
+
+      .profile-image {
+        aspect-ratio: 4 / 5;
+      }
+
+      .bench-section {
+        justify-content: stretch;
+      }
+
+      .bench-section .bench {
+        width: 100%;
+      }
+
     }
+
   </style>
 </BaseLayout>
