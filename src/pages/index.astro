@@ -3,11 +3,91 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import BlogList from '../components/BlogList.astro';
 import { getCollection } from 'astro:content';
-const projects = (await getCollection('projects')).filter(p=>p.data.featured).sort((a,b)=>a.data.number.localeCompare(b.data.number));
-const posts = (await getCollection('blog')).filter(p=>!p.data.draft).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,4);
+
+const projects = (await getCollection('projects'))
+  .filter(p => p.data.featured)
+  .sort((a, b) => a.data.number.localeCompare(b.data.number));
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
 ---
+
 <BaseLayout>
-<section class="hero"><div><div class="eyebrow">ELECTRONICS · ROBOTICS · SOFTWARE · MAKING</div><h1>I BUILD<br/>THINGS.</h1><p class="hero-copy">I'm Bolan. I like figuring out how things work, then building my own version. This is the running record of what I'm making, breaking, and learning.</p><div class="actions"><a class="button primary" href="/projects">EXPLORE PROJECTS →</a><a class="button" href="/blog">READ THE LAB LOG</a></div></div><aside class="bench"><div class="bench-title"><span class="eyebrow">ON THE BENCH</span><span class="mono muted">NOW</span></div><div class="bench-project"><span class="status">ACTIVE</span><h3>Terminus</h3><p class="muted">A terminal-style cellular phone built from scratch.</p></div><div class="bench-project"><span class="status">EXPERIMENT</span><h3>ROS Graph</h3><p class="muted">A visual node environment for ROS 2 developers.</p></div></aside></section>
-<section class="section"><div class="section-head"><div><div class="eyebrow">01 / WORK</div><h2>Selected builds.</h2></div><a href="/projects">VIEW ARCHIVE →</a></div><div class="project-grid">{projects.map(project=><ProjectCard project={project}/>)}</div></section>
-<section class="section"><div class="section-head"><div><div class="eyebrow">02 / NOTES</div><h2>Lab log.</h2></div><a href="/blog">ALL ENTRIES →</a></div><BlogList posts={posts}/></section>
+  <main class="home">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">ELECTRONICS · ROBOTICS · SOFTWARE · MAKING</div>
+        <h1>I BUILD<br />THINGS.</h1>
+        <p class="hero-copy">
+          I'm Bolan. I like figuring out how things work, then building my own
+          version. This is the running record of what I'm making, breaking,
+          and learning.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="/projects">EXPLORE PROJECTS →</a>
+          <a class="button" href="/blog">READ THE LAB LOG</a>
+        </div>
+      </div>
+
+      <aside class="bench">
+        <div class="bench-title">
+          <span class="eyebrow">ON THE BENCH</span>
+          <span class="mono muted">NOW</span>
+        </div>
+
+        <div class="bench-project">
+          <span class="status">ACTIVE</span>
+          <h3>Terminus</h3>
+          <p class="muted">A terminal-style cellular phone built from scratch.</p>
+        </div>
+
+        <div class="bench-project">
+          <span class="status">EXPERIMENT</span>
+          <h3>ROS Graph</h3>
+          <p class="muted">A visual node environment for ROS 2 developers.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">01 / WORK</div>
+          <h2>Selected builds.</h2>
+        </div>
+        <a href="/projects">VIEW ARCHIVE →</a>
+      </div>
+
+      <div class="project-grid">
+        {projects.map(project => <ProjectCard project={project} />)}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">02 / NOTES</div>
+          <h2>Lab log.</h2>
+        </div>
+        <a href="/blog">ALL ENTRIES →</a>
+      </div>
+
+      <BlogList posts={posts} />
+    </section>
+  </main>
+
+  <style>
+    .home {
+      padding-inline: 32px;
+    }
+
+    @media (max-width: 700px) {
+      .home {
+        padding-inline: 20px;
+      }
+    }
+  </style>
 </BaseLayout>
