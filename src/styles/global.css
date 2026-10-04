@@ -56,6 +56,7 @@ body {
   color: var(--text);
 
   font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   line-height: 1.65;
 
   -webkit-font-smoothing: antialiased;
@@ -91,12 +92,15 @@ img {
 .container {
   width: min(
     calc(100% - 48px),
+    calc(100% - 48px),
     var(--max)
   );
 
   margin: 0 auto;
+  margin: 0 auto;
 }
 
+.mono {
 .mono {
   font-family: 'DM Mono', monospace;
 }
@@ -135,6 +139,7 @@ img {
 }
 
 .nav {
+  height: 72px;
   height: 72px;
 
   display: flex;
@@ -204,6 +209,11 @@ img {
 .hero {
   position: relative;
 
+/* --------------------------------------------------
+   HERO
+-------------------------------------------------- */
+
+.hero {
   display: grid;
 
   grid-template-columns:
@@ -345,6 +355,7 @@ img {
 
 /* --------------------------------------------------
    PROFILE
+   PROFILE
 -------------------------------------------------- */
 
 .profile {
@@ -411,6 +422,7 @@ img {
 
   align-items: flex-end;
   justify-content: space-between;
+  justify-content: space-between;
 
   gap: 15px;
 
@@ -418,6 +430,7 @@ img {
 }
 
 .profile-info h3 {
+  margin: 3px 0 0;
   margin: 3px 0 0;
 
   font-size: 1rem;
@@ -431,7 +444,17 @@ img {
   color: var(--muted);
 }
 
+/*
+  Keep the corner marks subtle instead of
+  making the portrait look like a circuit board.
+*/
+
+.profile-corner {
+  display: none;
+}
+
 /* --------------------------------------------------
+   CURRENTLY
    CURRENTLY
 -------------------------------------------------- */
 
@@ -480,12 +503,15 @@ img {
 
   align-items: center;
   justify-content: space-between;
+  justify-content: space-between;
 
+  margin-bottom: 18px;
   margin-bottom: 18px;
 }
 
 .bench-projects {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
   grid-template-columns:
     repeat(3, 1fr);
@@ -541,7 +567,7 @@ img {
 
   letter-spacing: 0.07em;
 
-  text-transform: uppercase;
+  color: var(--accent);
 
   color: var(--accent);
 }
@@ -571,6 +597,8 @@ img {
 
   align-items: flex-end;
   justify-content: space-between;
+
+  gap: 30px;
 
   gap: 30px;
 
@@ -619,6 +647,7 @@ img {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
+  gap: 18px;
   gap: 18px;
 }
 
@@ -698,7 +727,6 @@ img {
 
 .card-top {
   display: flex;
-
   justify-content: space-between;
 
   gap: 20px;
@@ -742,17 +770,20 @@ img {
 
 .tags {
   display: flex;
-
   flex-wrap: wrap;
 
   gap: 6px;
+  gap: 6px;
 
+  margin-top: 25px;
   margin-top: 25px;
 }
 
 .tag {
   display: inline-block;
+  display: inline-block;
 
+  padding: 4px 8px;
   padding: 4px 8px;
 
   border-radius: 999px;
@@ -786,6 +817,7 @@ img {
 
   align-items: center;
 
+  gap: 30px;
   gap: 30px;
 
   padding: 28px 18px;
@@ -829,6 +861,10 @@ img {
   font-weight: 600;
 
   transition: color 0.2s ease;
+}
+
+.log-item:hover .log-title {
+  color: var(--accent);
 }
 
 .log-item:hover .log-title {
@@ -930,6 +966,7 @@ img {
 
 .content {
   max-width: 780px;
+  max-width: 780px;
 
   padding: 70px 0;
 }
@@ -984,7 +1021,9 @@ img {
 
 .content img {
   display: block;
+  display: block;
 
+  max-width: 100%;
   max-width: 100%;
   height: auto;
 
@@ -995,8 +1034,12 @@ img {
 
 .prose p > img {
   margin: 35px 0;
+  margin: 35px 0;
 }
 
+/* --------------------------------------------------
+   BLOCKQUOTES
+-------------------------------------------------- */
 /* --------------------------------------------------
    BLOCKQUOTES
 -------------------------------------------------- */
@@ -1006,7 +1049,7 @@ img {
 
   padding: 22px 25px;
 
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--accent);
 
   border-radius: 0 var(--radius-sm)
     var(--radius-sm) 0;
@@ -1044,7 +1087,9 @@ img {
   position: relative;
 
   margin: 35px 0;
+  margin: 35px 0;
 
+  padding: 45px 20px 20px;
   padding: 45px 20px 20px;
 
   overflow-x: auto;
@@ -1064,6 +1109,7 @@ img {
   background: transparent;
 
   border: 0;
+  background: transparent;
 
   color: #d8d7d0;
 
@@ -1134,6 +1180,7 @@ img {
   width: 100%;
 
   margin: 35px 0;
+  margin: 35px 0;
 
   border-collapse: separate;
 
@@ -1146,8 +1193,11 @@ img {
   border: 1px solid var(--line);
 
   background: var(--surface);
+  background: var(--surface);
 }
 
+.prose th,
+.prose td {
 .prose th,
 .prose td {
   padding: 12px 15px;
@@ -1173,6 +1223,8 @@ img {
 
 .prose tr:last-child td {
   border-bottom: 0;
+.prose tr:last-child td {
+  border-bottom: 0;
 }
 
 /* --------------------------------------------------
@@ -1183,7 +1235,6 @@ img {
   width: 100%;
 
   margin: 35px 0;
-
   padding: 28px;
 
   overflow-x: auto;
@@ -1193,11 +1244,11 @@ img {
   border: 1px solid var(--line);
 
   background: var(--surface);
+  background: var(--surface);
 }
 
 .mermaid {
   display: flex;
-
   justify-content: center;
 
   min-width: max-content;
@@ -1215,6 +1266,7 @@ img {
 .post-hero-image {
   width: 100%;
 
+  max-height: 520px;
   max-height: 520px;
 
   object-fit: cover;
@@ -1275,6 +1327,7 @@ img {
 
   align-items: center;
 
+
   gap: 20px;
 
   padding: 19px 12px;
@@ -1322,6 +1375,7 @@ img {
    RESPONSIVE
 -------------------------------------------------- */
 
+@media (max-width: 850px) {
 @media (max-width: 850px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1441,6 +1495,7 @@ img {
 
   .footer > * + * {
     display: block;
+  }
 
     margin-top: 10px;
   }
@@ -1466,6 +1521,9 @@ img {
     padding: 45px 0;
   }
 
+  .content p,
+  .content li {
+    font-size: 1rem;
   .content p,
   .content li {
     font-size: 1rem;
