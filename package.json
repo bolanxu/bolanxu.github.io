@@ -11,6 +11,8 @@
     "@astrojs/check": "^0.9.10",
     "@astrojs/mdx": "latest",
     "@astrojs/rss": "latest",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/lato": "^5.3.0",
     "astro": "latest",
     "mermaid": "^12.1.0",
     "typescript": "^6.0.3"

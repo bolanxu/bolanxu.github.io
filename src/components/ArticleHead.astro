@@ -1,0 +1,87 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  status?: string;
+  tags?: string[];
+}
+
+const { eyebrow, title, intro, status, tags = [] } = Astro.props;
+---
+
+<header class="article-head">
+  <p class="eyebrow">{eyebrow}</p>
+
+  <h1>{title}</h1>
+
+  {intro && <p class="article-intro">{intro}</p>}
+
+  {(status || tags.length > 0) && (
+    <ul class="tag-list">
+      {status && (
+        <li class="tag tag-status" data-status={status}>{status}</li>
+      )}
+
+      {tags.map((tag) => (
+        <li class="tag">{tag}</li>
+      ))}
+    </ul>
+  )}
+</header>
+
+
+<style>
+  .article-head {
+    margin-bottom: var(--space-6);
+  }
+
+  .article-head .eyebrow {
+    margin-bottom: var(--space-3);
+  }
+
+  .article-head h1 {
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .article-intro {
+    max-width: 38rem;
+    margin: var(--space-4) 0 0;
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tag {
+    padding: 0.2rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .tag-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tag-status[data-status="active"],
+  .tag-status[data-status="experiment"] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+</style>

@@ -1,9 +1,11 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleHead from "../../components/ArticleHead.astro";
+import ContentEnhancements from "../../components/ContentEnhancements.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection("blog");
 
   return posts
     .filter((p) => !p.data.draft)
@@ -15,36 +17,30 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// Dates are stored at UTC midnight, so format in UTC to avoid showing the day before.
+const dateLabel = post.data.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
 ---
 
 <BaseLayout
-  title={`${post.data.title} — Build Log`}
+  title={`${post.data.title} | Reserved Bits`}
   description={post.data.description}
 >
-  <section class="page-head">
-    <div class="container">
-      <div class="eyebrow">
-        LAB LOG /
-        {post.data.date.toLocaleDateString('en-US', {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        })}
-      </div>
+  <article>
+    <ArticleHead
+      eyebrow={dateLabel}
+      title={post.data.title}
+      intro={post.data.description}
+      tags={post.data.tags ?? []}
+    />
 
-      <h1>{post.data.title}</h1>
-
-      <p class="hero-copy">{post.data.description}</p>
-
-      <div class="tags">
-        {post.data.tags.map((tag) => (
-          <span class="tag">{tag}</span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <article class="container content prose">
     {post.data.image && (
       <img
         class="post-hero-image"
@@ -53,366 +49,40 @@ const { Content } = await render(post);
       />
     )}
 
-    <Content />
+    <div class="prose">
+      <Content />
+    </div>
   </article>
+
+  <p class="back-link">
+    <a href={`${base}/blog/`}>← All writing</a>
+  </p>
+
+  <ContentEnhancements />
 </BaseLayout>
 
-<!-- MERMAID -->
-<script>
-  import mermaid from 'mermaid';
-
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: 'base',
-    securityLevel: 'loose',
-
-    themeVariables: {
-      background: '#141716',
-      primaryColor: '#191c1b',
-      primaryTextColor: '#e9e7df',
-      primaryBorderColor: '#4b514d',
-      lineColor: '#e69a3a',
-      secondaryColor: '#141716',
-      secondaryTextColor: '#e9e7df',
-      secondaryBorderColor: '#4b514d',
-      tertiaryColor: '#191c1b',
-      tertiaryTextColor: '#e9e7df',
-      tertiaryBorderColor: '#4b514d',
-      fontFamily: 'Space Grotesk, sans-serif',
-      fontSize: '14px',
-    },
-
-    flowchart: {
-      curve: 'basis',
-      padding: 20,
-    },
-  });
-
-  async function renderMermaid() {
-    const blocks = document.querySelectorAll(
-      'code.language-mermaid'
-    );
-
-    if (!blocks.length) {
-      return;
-    }
-
-    for (const code of blocks) {
-      const pre = code.parentElement;
-
-      if (!pre || pre.tagName !== 'PRE') {
-        continue;
-      }
-
-      const source = code.textContent?.trim();
-
-      if (!source) {
-        continue;
-      }
-
-      const container = document.createElement('div');
-      container.className = 'mermaid-container';
-
-      const diagram = document.createElement('div');
-      diagram.className = 'mermaid';
-      diagram.textContent = source;
-
-      container.appendChild(diagram);
-
-      pre.replaceWith(container);
-    }
-
-    try {
-      await mermaid.run({
-        querySelector: '.mermaid',
-      });
-    } catch (error) {
-      console.error('Mermaid rendering failed:', error);
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      renderMermaid,
-      { once: true }
-    );
-  } else {
-    renderMermaid();
-  }
-</script>
-
-<!-- CODE BLOCKS -->
-<script>
-  function getLanguage(code, pre) {
-    /*
-     * Astro/Shiki can store the language in different places
-     * depending on the version/configuration.
-     *
-     * Check all of the useful locations before falling back
-     * to "text".
-     */
-
-    // 1. data-language on <code>
-    const codeDataLanguage = code.getAttribute('data-language');
-
-    if (codeDataLanguage) {
-      return codeDataLanguage;
-    }
-
-    // 2. data-language on <pre>
-    const preDataLanguage = pre.getAttribute('data-language');
-
-    if (preDataLanguage) {
-      return preDataLanguage;
-    }
-
-    // 3. language-* class on <code>
-    const codeLanguageClass = Array.from(code.classList).find(
-      (className) => className.startsWith('language-')
-    );
-
-    if (codeLanguageClass) {
-      return codeLanguageClass.replace('language-', '');
-    }
-
-    // 4. language-* class on <pre>
-    const preLanguageClass = Array.from(pre.classList).find(
-      (className) => className.startsWith('language-')
-    );
-
-    if (preLanguageClass) {
-      return preLanguageClass.replace('language-', '');
-    }
-
-    // 5. Shiki sometimes stores it in data-lang
-    const codeDataLang = code.getAttribute('data-lang');
-
-    if (codeDataLang) {
-      return codeDataLang;
-    }
-
-    const preDataLang = pre.getAttribute('data-lang');
-
-    if (preDataLang) {
-      return preDataLang;
-    }
-
-    return 'text';
-  }
-
-  function formatLanguage(language) {
-    const names = {
-      js: 'JavaScript',
-      javascript: 'JavaScript',
-
-      ts: 'TypeScript',
-      typescript: 'TypeScript',
-
-      py: 'Python',
-      python: 'Python',
-
-      cpp: 'C++',
-      cxx: 'C++',
-      'c++': 'C++',
-
-      c: 'C',
-
-      cs: 'C#',
-      csharp: 'C#',
-
-      java: 'Java',
-
-      html: 'HTML',
-      htm: 'HTML',
-
-      css: 'CSS',
-      scss: 'SCSS',
-      sass: 'Sass',
-
-      json: 'JSON',
-
-      yaml: 'YAML',
-      yml: 'YAML',
-
-      bash: 'Bash',
-      sh: 'Shell',
-      shell: 'Shell',
-
-      markdown: 'Markdown',
-      md: 'Markdown',
-
-      astro: 'Astro',
-
-      sql: 'SQL',
-
-      rust: 'Rust',
-
-      go: 'Go',
-
-      xml: 'XML',
-
-      php: 'PHP',
-
-      ruby: 'Ruby',
-      rb: 'Ruby',
-
-      swift: 'Swift',
-
-      kotlin: 'Kotlin',
-
-      lua: 'Lua',
-
-      dockerfile: 'Dockerfile',
-      docker: 'Docker',
-
-      plaintext: 'Text',
-      text: 'Text',
-      txt: 'Text',
-    };
-
-    const normalized = language.toLowerCase();
-
-    return names[normalized] || language;
-  }
-
-  function setupCodeBlocks() {
-    const blocks = document.querySelectorAll('.prose pre');
-
-    blocks.forEach((pre) => {
-      // Don't touch Mermaid blocks.
-      if (pre.querySelector('code.language-mermaid')) {
-        return;
-      }
-
-      // Don't enhance the same block twice.
-      if (pre.dataset.enhanced === 'true') {
-        return;
-      }
-
-      const code = pre.querySelector('code');
-
-      if (!code) {
-        return;
-      }
-
-      pre.dataset.enhanced = 'true';
-
-      /*
-       * Get the language BEFORE modifying the DOM.
-       */
-      const language = getLanguage(code, pre);
-      const displayLanguage = formatLanguage(language);
-
-      /*
-       * Wrapper
-       */
-      const wrapper = document.createElement('div');
-      wrapper.className = 'code-block';
-
-      pre.parentNode?.insertBefore(wrapper, pre);
-      wrapper.appendChild(pre);
-
-      /*
-       * Language label
-       */
-      const label = document.createElement('span');
-      label.className = 'code-language';
-      label.textContent = displayLanguage;
-
-      /*
-       * Copy button
-       */
-      const button = document.createElement('button');
-
-      button.className = 'code-copy';
-      button.type = 'button';
-      button.textContent = 'COPY';
-      button.setAttribute(
-        'aria-label',
-        `Copy ${displayLanguage} code`
-      );
-
-      button.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(
-            code.textContent || ''
-          );
-
-          button.textContent = 'COPIED';
-          button.classList.add('copied');
-
-          setTimeout(() => {
-            button.textContent = 'COPY';
-            button.classList.remove('copied');
-          }, 1500);
-        } catch (error) {
-          console.error(
-            'Could not copy code:',
-            error
-          );
-
-          button.textContent = 'ERROR';
-
-          setTimeout(() => {
-            button.textContent = 'COPY';
-          }, 1500);
-        }
-      });
-
-      wrapper.appendChild(label);
-      wrapper.appendChild(button);
-    });
-  }
-
-  function initializeCodeBlocks() {
-    /*
-     * Mermaid needs to replace its <pre> blocks first.
-     * Wait one frame so we don't accidentally enhance them.
-     */
-    requestAnimationFrame(() => {
-      setupCodeBlocks();
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener(
-      'DOMContentLoaded',
-      initializeCodeBlocks,
-      { once: true }
-    );
-  } else {
-    initializeCodeBlocks();
-  }
-</script>
 
 <style>
   .post-hero-image {
     width: 100%;
-    max-height: 500px;
+    max-height: 460px;
+    margin-bottom: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
     object-fit: cover;
-    display: block;
-    margin-bottom: 45px;
-    border: 1px solid var(--line);
   }
 
-  .mermaid-container {
-    width: 100%;
-    margin: 35px 0;
-    padding: 28px;
-    overflow-x: auto;
-    border: 1px solid var(--line);
-    background: var(--panel);
+  .back-link {
+    margin: var(--space-7) 0 0;
+    font-size: 0.95rem;
   }
 
-  .mermaid {
-    display: flex;
-    justify-content: center;
-    min-width: max-content;
+  .back-link a {
+    color: var(--color-text-muted);
+    text-decoration: none;
   }
 
-  .mermaid svg {
-    max-width: 100%;
-    height: auto;
+  .back-link a:hover {
+    color: var(--color-accent);
   }
 </style>

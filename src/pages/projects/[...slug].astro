@@ -1,9 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleHead from "../../components/ArticleHead.astro";
+import BlogList from "../../components/BlogList.astro";
+import ContentEnhancements from "../../components/ContentEnhancements.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getCollection("projects");
 
   return projects.map((project) => ({
     params: { slug: project.id },
@@ -14,87 +17,77 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 
-// Find all blog posts associated with this project
-const relatedPosts = (await getCollection('blog'))
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// Blog posts that belong to this project, newest first.
+const relatedPosts = (await getCollection("blog"))
   .filter((post) => !post.data.draft && post.data.project === project.id)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const tags = [project.data.category, ...(project.data.technologies ?? [])].filter(
+  Boolean
+);
 ---
 
 <BaseLayout
-  title={`${project.data.title} — Projects`}
+  title={`${project.data.title} | Reserved Bits`}
   description={project.data.description}
 >
-  <section class="page-head">
-    <div class="container">
-      <div class="eyebrow">
-        PROJECT / {project.data.number}
-      </div>
+  <article>
+    <ArticleHead
+      eyebrow={`Project ${project.data.number}`}
+      title={project.data.title}
+      intro={project.data.description}
+      status={project.data.status}
+      tags={tags}
+    />
 
-      <h1>{project.data.title}</h1>
-
-      <p class="hero-copy">{project.data.description}</p>
-
-      <div class="tags">
-        <span class="tag">{project.data.category}</span>
-        <span class="tag">{project.data.status}</span>
-
-        {project.data.technologies.map((technology) => (
-          <span class="tag">{technology}</span>
-        ))}
-      </div>
+    <div class="prose">
+      <Content />
     </div>
-  </section>
-
-  <article class="container content prose">
-    <Content />
   </article>
 
   {relatedPosts.length > 0 && (
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">PROJECT LOG</div>
-            <h2>Build notes.</h2>
-          </div>
-        </div>
+    <section class="project-log">
+      <p class="eyebrow">Project log</p>
+      <h2>Build notes.</h2>
 
-        <div class="log-list">
-          {relatedPosts.map((post) => (
-            <a class="log-item" href={`/blog/${post.id}`}>
-              <span class="log-date">
-                {post.data.date.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
-                })}
-              </span>
-
-              <span>
-                <span class="log-title">{post.data.title}</span>
-                <span class="log-description">
-                  {post.data.description}
-                </span>
-              </span>
-
-              <span class="log-arrow">→</span>
-            </a>
-          ))}
-        </div>
-      </div>
+      <BlogList posts={relatedPosts} />
     </section>
   )}
 
-  <style>
-    .log-description {
-      display: block;
-      color: var(--muted);
-      margin-top: 5px;
-      font-size: 0.9rem;
-    }
+  <p class="back-link">
+    <a href={`${base}/projects/`}>← All projects</a>
+  </p>
 
-    .log-item {
-      text-decoration: none;
-    }
-  </style>
+  <ContentEnhancements />
 </BaseLayout>
+
+
+<style>
+  .project-log {
+    margin-top: var(--space-8);
+  }
+
+  .project-log .eyebrow {
+    margin-bottom: var(--space-2);
+  }
+
+  .project-log h2 {
+    margin-bottom: var(--space-5);
+  }
+
+  .back-link {
+    margin: var(--space-7) 0 0;
+    font-size: 0.95rem;
+  }
+
+  .back-link a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .back-link a:hover {
+    color: var(--color-accent);
+  }
+</style>

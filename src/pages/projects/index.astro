@@ -1,53 +1,58 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHead from "../../components/PageHead.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
 
-const projects = (await getCollection('projects'))
-  .sort((a, b) =>
-    a.data.number.localeCompare(b.data.number)
-  );
+const projects = (await getCollection("projects")).sort((a, b) =>
+  a.data.number.localeCompare(b.data.number)
+);
 ---
 
 <BaseLayout
-  title="Projects — Bolan Xu"
+  title="Projects | Reserved Bits"
   description="Things I've built, experimented with, and learned from."
 >
+  <div class="page-wide">
+    <PageHead
+      eyebrow="Projects"
+      title="Things I’ve made."
+      intro="Electronics, software, robots, experiments, and the occasional overly complicated solution to a very simple problem."
+    />
 
-  <section class="page-head">
-
-    <div class="container">
-
-      <div class="eyebrow">
-        PROJECTS / BUILDS / EXPERIMENTS
+    {projects.length > 0 ? (
+      <div class="project-grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
       </div>
-
-      <h1>
-        Things<br />
-        I've built.
-      </h1>
-
-      <p class="hero-copy">
-        Electronics, software, robots, experiments,
-        and the occasional overly complicated solution
-        to a very simple problem.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <section class="section container">
-
-    <div class="project-grid">
-
-      {projects.map(project => (
-        <ProjectCard project={project} />
-      ))}
-
-    </div>
-
-  </section>
-
+    ) : (
+      <p class="empty">The first project write-ups are coming soon.</p>
+    )}
+  </div>
 </BaseLayout>
+
+
+<style>
+  .page-wide {
+    width: 100%;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  .empty {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 760px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

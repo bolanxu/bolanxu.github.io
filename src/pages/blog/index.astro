@@ -1,49 +1,36 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogList from '../../components/BlogList.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHead from "../../components/PageHead.astro";
+import BlogList from "../../components/BlogList.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog'))
-  .filter(p => !p.data.draft)
-  .sort(
-    (a, b) =>
-      b.data.date.valueOf() -
-      a.data.date.valueOf()
-  );
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <BaseLayout
-  title="Writing — Bolan Xu"
+  title="Writing | Reserved Bits"
   description="Things I'm thinking about, learning, building, and trying to understand."
 >
+  <PageHead
+    eyebrow="Writing"
+    title="Writing."
+    intro="Thoughts about technology, AI, building things, learning, and whatever has been taking up space in my head lately."
+  />
 
-  <section class="page-head">
-
-    <div class="container">
-
-      <div class="eyebrow">
-        WRITING / IDEAS / PROJECTS
-      </div>
-
-      <h1>
-        Writing.
-      </h1>
-
-      <p class="hero-copy">
-        Thoughts about technology, AI, building things,
-        learning, and whatever has been taking up space
-        in my head lately.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <section class="section container">
-
+  {posts.length > 0 ? (
     <BlogList posts={posts} />
-
-  </section>
-
+  ) : (
+    <p class="empty">Nothing here yet. The first posts are on their way.</p>
+  )}
 </BaseLayout>
+
+
+<style>
+  .empty {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+  }
+</style>

@@ -1,10 +1,10 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const projects = defineCollection({
   loader: glob({
-    pattern: '**/*.md',
-    base: './src/content/projects',
+    pattern: "**/*.md",
+    base: "./src/content/projects",
   }),
 
   schema: z.object({
@@ -13,11 +13,11 @@ const projects = defineCollection({
     description: z.string(),
     category: z.string(),
     status: z.enum([
-      'active',
-      'complete',
-      'experiment',
-      'archived',
-      'abandoned',
+      "active",
+      "complete",
+      "experiment",
+      "archived",
+      "abandoned",
     ]),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
@@ -30,13 +30,13 @@ const projects = defineCollection({
 
 const blog = defineCollection({
   loader: glob({
-    pattern: '**/*.md',
-    base: './src/content/blog',
+    pattern: "**/*.md",
+    base: "./src/content/blog",
   }),
 
   schema: z.object({
     title: z.string(),
-    description: z.string().default(''),
+    description: z.string().default(""),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     project: z.string().optional(),

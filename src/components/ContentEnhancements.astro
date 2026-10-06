@@ -1,0 +1,349 @@
+---
+// Shared by blog posts and project pages.
+// Adds Mermaid diagrams and copy buttons to code blocks.
+---
+
+<!-- MERMAID -->
+<script>
+  function token(name: string): string {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(name)
+      .trim();
+  }
+
+  function findMermaidBlocks(): HTMLPreElement[] {
+    const blocks = new Set<HTMLPreElement>();
+
+    document
+      .querySelectorAll<HTMLElement>("code.language-mermaid")
+      .forEach((code) => {
+        const pre = code.parentElement;
+
+        if (pre instanceof HTMLPreElement) {
+          blocks.add(pre);
+        }
+      });
+
+    document
+      .querySelectorAll<HTMLPreElement>('pre[data-language="mermaid"]')
+      .forEach((pre) => blocks.add(pre));
+
+    return [...blocks];
+  }
+
+  async function renderMermaid() {
+    const blocks = findMermaidBlocks();
+
+    if (blocks.length === 0) {
+      return;
+    }
+
+    // Only download Mermaid on pages that actually have a diagram.
+    const { default: mermaid } = await import("mermaid");
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "base",
+      securityLevel: "loose",
+
+      themeVariables: {
+        background: token("--color-background"),
+        primaryColor: token("--color-surface"),
+        primaryTextColor: token("--color-text"),
+        primaryBorderColor: token("--color-text-muted"),
+        lineColor: token("--color-accent"),
+        secondaryColor: token("--color-surface"),
+        secondaryTextColor: token("--color-text"),
+        secondaryBorderColor: token("--color-text-muted"),
+        tertiaryColor: token("--color-surface"),
+        tertiaryTextColor: token("--color-text"),
+        tertiaryBorderColor: token("--color-text-muted"),
+        fontFamily: token("--font-body"),
+        fontSize: "15px",
+      },
+
+      flowchart: {
+        curve: "basis",
+        padding: 20,
+      },
+    });
+
+    for (const pre of blocks) {
+      const source = pre.textContent?.trim();
+
+      if (!source) {
+        continue;
+      }
+
+      const container = document.createElement("div");
+      container.className = "mermaid-container";
+
+      const diagram = document.createElement("div");
+      diagram.className = "mermaid";
+      diagram.textContent = source;
+
+      container.appendChild(diagram);
+      pre.replaceWith(container);
+    }
+
+    try {
+      await mermaid.run({ querySelector: ".mermaid" });
+    } catch (error) {
+      console.error("Mermaid rendering failed:", error);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderMermaid, {
+      once: true,
+    });
+  } else {
+    renderMermaid();
+  }
+</script>
+
+<!-- CODE BLOCKS -->
+<script>
+  const languageNames: Record<string, string> = {
+    js: "JavaScript",
+    javascript: "JavaScript",
+    ts: "TypeScript",
+    typescript: "TypeScript",
+    py: "Python",
+    python: "Python",
+    c: "C",
+    cpp: "C++",
+    cxx: "C++",
+    "c++": "C++",
+    cs: "C#",
+    csharp: "C#",
+    java: "Java",
+    arduino: "Arduino",
+    html: "HTML",
+    htm: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sass: "Sass",
+    json: "JSON",
+    yaml: "YAML",
+    yml: "YAML",
+    toml: "TOML",
+    bash: "Bash",
+    sh: "Shell",
+    shell: "Shell",
+    markdown: "Markdown",
+    md: "Markdown",
+    astro: "Astro",
+    sql: "SQL",
+    rust: "Rust",
+    go: "Go",
+    xml: "XML",
+    php: "PHP",
+    ruby: "Ruby",
+    rb: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    lua: "Lua",
+    diff: "Diff",
+    makefile: "Makefile",
+    dockerfile: "Dockerfile",
+    docker: "Docker",
+    plaintext: "Text",
+    text: "Text",
+    txt: "Text",
+  };
+
+  function languageFromClass(element: HTMLElement): string | undefined {
+    return Array.from(element.classList)
+      .find((name) => name.startsWith("language-"))
+      ?.replace("language-", "");
+  }
+
+  // Astro and Shiki store the language in different places depending on setup.
+  function getLanguage(code: HTMLElement, pre: HTMLElement): string {
+    return (
+      code.dataset.language ||
+      pre.dataset.language ||
+      languageFromClass(code) ||
+      languageFromClass(pre) ||
+      code.dataset.lang ||
+      pre.dataset.lang ||
+      "text"
+    );
+  }
+
+  function formatLanguage(language: string): string {
+    return languageNames[language.toLowerCase()] || language;
+  }
+
+  function isMermaid(pre: HTMLElement): boolean {
+    return (
+      pre.dataset.language === "mermaid" ||
+      pre.querySelector("code.language-mermaid") !== null
+    );
+  }
+
+  function setupCodeBlocks() {
+    const blocks = document.querySelectorAll<HTMLPreElement>(".prose pre");
+
+    blocks.forEach((pre) => {
+      if (isMermaid(pre) || pre.dataset.enhanced === "true") {
+        return;
+      }
+
+      const code = pre.querySelector("code");
+
+      if (!code) {
+        return;
+      }
+
+      pre.dataset.enhanced = "true";
+
+      const displayLanguage = formatLanguage(getLanguage(code, pre));
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      const label = document.createElement("span");
+      label.className = "code-language";
+      label.textContent = displayLanguage;
+
+      const button = document.createElement("button");
+      button.className = "code-copy";
+      button.type = "button";
+      button.textContent = "Copy";
+      button.setAttribute("aria-label", `Copy ${displayLanguage} code`);
+
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(code.textContent || "");
+
+          button.textContent = "Copied";
+          button.classList.add("copied");
+
+          setTimeout(() => {
+            button.textContent = "Copy";
+            button.classList.remove("copied");
+          }, 1500);
+        } catch (error) {
+          console.error("Could not copy code:", error);
+
+          button.textContent = "Error";
+
+          setTimeout(() => {
+            button.textContent = "Copy";
+          }, 1500);
+        }
+      });
+
+      wrapper.appendChild(label);
+      wrapper.appendChild(button);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupCodeBlocks, {
+      once: true,
+    });
+  } else {
+    setupCodeBlocks();
+  }
+</script>
+
+<style is:global>
+  /* DIAGRAMS */
+
+  .mermaid-container {
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+    background: var(--color-surface);
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    min-width: max-content;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  /* CODE BLOCKS */
+
+  .code-block {
+    position: relative;
+  }
+
+  .code-block pre {
+    margin: 0;
+    padding-top: 2.75rem;
+  }
+
+  .code-language {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .code-copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .code-copy:hover,
+  .code-copy.copied {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+
+  /* CODE THEME
+     Only applies when astro.config uses two Shiki themes
+     (light and dark). Otherwise these rules do nothing. */
+
+  .astro-code-themes {
+    background-color: var(--color-surface) !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .astro-code-themes,
+    .astro-code-themes span {
+      color: var(--shiki-dark) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .code-copy {
+      transition: none;
+    }
+  }
+</style>

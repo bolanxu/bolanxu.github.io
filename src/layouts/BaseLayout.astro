@@ -1,52 +1,99 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
 
 const {
-  title = 'Bolan Xu',
-  description = 'Things I build, ideas I have, and what I am learning along the way.',
+  title = "Reserved Bits",
+  description = "A personal blog about making things, questioning assumptions, and figuring things out.",
 } = Astro.props;
+
+const siteName = "Reserved Bits";
+const pageTitle = title === siteName ? siteName : `${title} · ${siteName}`;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
+    <title>{pageTitle}</title>
 
-    <meta
-      name="description"
-      content={description}
-    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
 
   <body>
-    <header class="site-header">
-      <div class="container nav">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-        <a class="brand" href="/">
-          Bolan Xu
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-name" href="/">
+          <span class="site-name__mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span>Reserved Bits</span>
         </a>
 
-        <nav class="nav-links">
-          <a href="/projects">Projects</a>
-          <a href="/blog">Writing</a>
-          <a href="/about">About</a>
+        <nav aria-label="Main navigation">
+          <ul class="site-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Posts</a></li>
+            <li><a href="/projects/">Projects</a></li>
+            <li><a href="/about/">About</a></li>
+          </ul>
         </nav>
-
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 
-    <footer class="container footer">
-      <span>Bolan Xu</span>
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>©2026 Bolan Xu.</p>
 
-      <span>
-        © {new Date().getFullYear()} Bolan Xu
-      </span>
+        <nav aria-label="Footer navigation">
+          <ul class="footer-links">
+            <li>
+              <a
+                href="https://github.com/bolanxu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="https://hackaday.io/bolanxu"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hackaday
+              </a>
+            </li>
+
+            <li>
+              <a href="/rss.xml">RSS</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </footer>
   </body>
 </html>

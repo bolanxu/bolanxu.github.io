@@ -1,148 +1,177 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHead from "../components/PageHead.astro";
 ---
 
-<BaseLayout title="About — Bolan Xu">
+<BaseLayout
+  title="About | Reserved Bits"
+  description="Who I am, what I like to build, and how to get in touch."
+>
+  <PageHead eyebrow="About" title="Hi, I’m Bolan." />
 
-  <!-- ==========================================
-       PAGE HEADER
-       ========================================== -->
-
-  <section class="page-head">
-    <div class="container">
-
-      <div class="eyebrow">
-        ABOUT / 00
-      </div>
-
-      <h1>
-        HI, I'M<br />
-        BOLAN.
-      </h1>
-
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       ABOUT
-       ========================================== -->
-
-  <article class="container content prose">
-
-    <!-- Short introduction -->
+  <article class="prose">
     <p>
-      <!-- WRITE A SHORT 1–2 SENTENCE INTRO HERE -->
-      I'm a high school senior!
-      I like figuring out how things work, then building my own version it.
+      I'm a high school senior! I like figuring out how things work,
+      then building my own version of it.
     </p>
 
-    <!-- What you do / what you're interested in -->
     <p>
-      <!-- DESCRIBE THE TYPES OF THINGS YOU BUILD HERE -->
-      Most of what I make is somwhere between electronics,
+      Most of what I make is somewhere between electronics,
       embedded systems, software, and robotics.
     </p>
-
   </article>
 
-  <!-- ==========================================
-     CONTACT
-     ========================================== -->
 
-<section class="contact-section">
+  <section class="contact">
+    <p class="eyebrow">Contact</p>
 
-  <div class="eyebrow">
-    CONTACT / FIND ME
-  </div>
+    <h2>Let’s connect.</h2>
 
-  <h2>Let's connect.</h2>
+    <p class="contact-intro">
+      If you want to talk about a project, electronics, robotics,
+      or just building weird things, you can find me here.
+    </p>
 
-  <p>
-    If you want to talk about a project, electronics, robotics, or just building weird things, you can find me here.
-  </p>
+    <ul class="contact-links">
+      <li>
+        <a class="contact-link" href="mailto:bolanxu123@gmail.com">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">bolanxu123@gmail.com</span>
+          <span class="contact-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
 
-  <div class="contact-links">
+      <li>
+        <a
+          class="contact-link"
+          href="https://github.com/bolanxu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">github.com/bolanxu</span>
+          <span class="contact-arrow" aria-hidden="true">↗</span>
+          <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
+      </li>
 
-    <a
-      class="contact-link"
-      href="mailto:bolanxu123@gmail.com"
-    >
-      <span class="contact-label">
-        EMAIL
-      </span>
+      <li>
+        <a
+          class="contact-link"
+          href="https://www.linkedin.com/in/bolan-xu-3166a4395/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">linkedin.com/in/bolan-xu-3166a4395</span>
+          <span class="contact-arrow" aria-hidden="true">↗</span>
+          <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
+      </li>
 
-      <span class="contact-value">
-        bolanxu123@gmail.com
-      </span>
-
-      <span class="contact-arrow">
-        ↗
-      </span>
-    </a>
-
-
-    <a
-      class="contact-link"
-      href="https://github.com/bolanxu"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span class="contact-label">
-        GITHUB
-      </span>
-
-      <span class="contact-value">
-        github.com/bolanxu
-      </span>
-
-      <span class="contact-arrow">
-        ↗
-      </span>
-    </a>
-
-
-    <a
-      class="contact-link"
-      href="https://www.linkedin.com/in/bolan-xu-3166a4395/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span class="contact-label">
-        LINKEDIN
-      </span>
-
-      <span class="contact-value">
-        linkedin.com/in/bolan-xu-3166a4395
-      </span>
-
-      <span class="contact-arrow">
-        ↗
-      </span>
-    </a>
-
-
-    <a
-      class="contact-link"
-      href="https://www.youtube.com/@TheBitDude"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span class="contact-label">
-        YOUTUBE
-      </span>
-
-      <span class="contact-value">
-        @TheBitDude
-      </span>
-
-      <span class="contact-arrow">
-        ↗
-      </span>
-    </a>
-
-  </div>
-
-</section>
-
+      <li>
+        <a
+          class="contact-link"
+          href="https://www.youtube.com/@TheBitDude"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="contact-label">YouTube</span>
+          <span class="contact-value">@TheBitDude</span>
+          <span class="contact-arrow" aria-hidden="true">↗</span>
+          <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
+      </li>
+    </ul>
+  </section>
 </BaseLayout>
+
+
+<style>
+  .contact {
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact h2 {
+    margin-bottom: var(--space-3);
+  }
+
+  .contact-intro {
+    max-width: 34rem;
+    color: var(--color-text-muted);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-link {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 58px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 7px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .contact-link:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transform: translateY(-1px);
+  }
+
+  .contact-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .contact-label {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact-value {
+    overflow-wrap: anywhere;
+    font-size: 0.95rem;
+  }
+
+  .contact-arrow {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 600px) {
+    .contact-link {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-1) var(--space-3);
+    }
+
+    .contact-label {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-link {
+      transition: none;
+    }
+  }
+</style>

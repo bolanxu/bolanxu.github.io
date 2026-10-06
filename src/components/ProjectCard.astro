@@ -1,47 +1,137 @@
 ---
 const { project } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const { title, description, status, category } = project.data;
 ---
 
-<a
-  class="card"
-  href={`/projects/${project.id}/`}
->
+<a class="project-card" href={`${base}/projects/${project.id}/`}>
+  <div class="card-meta">
+    {category && <span class="card-category">{category}</span>}
 
-  <div>
-
-    <div class="card-top">
-
-      <span class="number">
-        {project.data.category}
-      </span>
-
-      <span class="status">
-        {project.data.status}
-      </span>
-
-    </div>
-
-    <h3>
-      {project.data.title}
-    </h3>
-
-    <p class="muted">
-      {project.data.description}
-    </p>
-
+    {status && (
+      <span class="card-status" data-status={status}>{status}</span>
+    )}
   </div>
 
+  <h3 class="card-title">{title}</h3>
 
-  <div class="tags">
+  {description && <p class="card-description">{description}</p>}
 
-    {project.data.technologies
-      .slice(0, 4)
-      .map((x) => (
-        <span class="tag">
-          {x}
-        </span>
-      ))}
-
-  </div>
-
+  <span class="card-cta">
+    View project
+    <span aria-hidden="true">↗</span>
+  </span>
 </a>
+
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+    transition:
+      border-color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+    transform: translateY(-2px);
+  }
+
+  .project-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .card-category {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-status {
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .card-status[data-status="active"],
+  .card-status[data-status="experiment"] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .card-title {
+    margin-bottom: var(--space-2);
+    font-size: 1.45rem;
+    line-height: 1.2;
+    transition: color 160ms ease;
+  }
+
+  .project-card:hover .card-title {
+    color: var(--color-accent);
+  }
+
+  .card-description {
+    display: -webkit-box;
+    margin: 0 0 var(--space-5);
+    overflow: hidden;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    color: var(--color-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .card-cta span {
+    color: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card,
+    .card-title {
+      transition: none;
+    }
+
+    .project-card:hover {
+      transform: none;
+    }
+  }
+</style>
